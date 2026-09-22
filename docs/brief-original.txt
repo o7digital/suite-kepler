@@ -1,0 +1,11 @@
+INSTRUCTIONS À COLLER DANS CODEX — BUSINESS SUITES KEPLER
+
+Je joins Business-Suites-Kepler-CODE-ET-INSTRUCTIONS.zip. Décompresse l’archive et reprends la maquette du site Business Suites Kepler.
+
+Objectif : conserver son rendu premium et responsive, ses textes en espagnol et ses vraies photos. Si tu travailles dans un projet existant, intègre la maquette à sa structure sans perdre les contenus ni les images. Le site doit fonctionner sur ordinateur et mobile.
+
+Le bouton de réservation doit ouvrir le moteur Cloudbeds : https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn. Ne crée ni faux prix ni fausse disponibilité.
+
+Vérifie le menu mobile, l’affichage de toutes les images, les liens et la lisibilité. Exécute le projet, montre-moi un aperçu et résume les fichiers modifiés. Ne publie pas sur le domaine officiel sans que je te le demande.
+
+Le code initial est statique : index.html contient le HTML, le CSS et le JavaScript ; les photos sont dans assets/. Pour un aperçu local, lance python3 -m http.server 8080 depuis le dossier extrait et ouvre http://localhost:8080/.

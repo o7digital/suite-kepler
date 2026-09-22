@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#172827" />
+    <meta
+      name="description"
+      content="Business Suites Kepler: habitaciones y Grand Suites en Verónica Anzúres, a dos calles de Polanco. Consulta disponibilidad y reserva en línea."
+    />
+    <title>Business Suites Kepler — Suites en Ciudad de México</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='5' fill='%23172827'/%3E%3Cpath d='M18 12v40M20 33 46 12M26 29l22 23' fill='none' stroke='%23c5a476' stroke-width='4.5' stroke-linecap='square'/%3E%3C/svg%3E"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/grand-suite-four.webp"
+      imagesrcset="assets/grand-suite-four-768.webp 768w, assets/grand-suite-four.webp 1501w"
+      imagesizes="(max-width: 680px) 100vw, 57vw"
+      type="image/webp"
+      fetchpriority="high"
+    />
+    <style>
+      :root {
+        --forest: #172827;
+        --forest2: #233a37;
+        --paper: #f6f3ec;
+        --white: #fffefa;
+        --bronze: #a07848;
+        --bronze-text: #795a32;
+        --bronzeLight: #c8aa7d;
+        --text: #22302e;
+        --muted: #596460;
+        --rule: #d9d8cf;
+        --display:
+          "Iowan Old Style", "Baskerville", "Palatino Linotype", Georgia, serif;
+        --sans: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        display: block;
+        max-width: 100%;
+      }
+      button {
+        font: inherit;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--bronze);
+        outline-offset: 5px;
+      }
+      .skip-link {
+        position: fixed;
+        z-index: 100;
+        top: 12px;
+        left: 12px;
+        padding: 12px 16px;
+        background: var(--forest);
+        color: white;
+        font-size: 0.8rem;
+        font-weight: 700;
+        transform: translateY(-160%);
+        transition: transform 0.2s;
+      }
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+      .container {
+        width: min(1420px, calc(100% - 108px));
+        margin-inline: auto;
+      }
+      .micro {
+        font-size: 0.72rem;
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin: 0 0 26px;
+        color: var(--bronze-text);
+        font-size: 0.71rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .section-label:before {
+        content: "";
+        width: 34px;
+        height: 1px;
+        background: currentColor;
+      }
+      .display {
+        font: normal clamp(3.2rem, 5vw, 5.6rem) / 1.04 var(--display);
+        letter-spacing: -0.055em;
+        margin: 0;
+      }
+      .display em {
+        font-weight: normal;
+        color: var(--bronze);
+      }
+      .arrow-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 27px;
+        border-bottom: 1px solid currentColor;
+        padding: 0 0 9px;
+        font-size: 0.71rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        font-weight: 700;
+        transition: gap 0.2s;
+      }
+      .arrow-link:hover {
+        gap: 36px;
+      }
+      .arrow-link span {
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        min-height: 56px;
+        padding: 17px 26px;
+        background: var(--forest);
+        color: #fff;
+        font-size: 0.73rem;
+        line-height: 1.2;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      .button:hover {
+        background: var(--forest2);
+        transform: translateY(-2px);
+      }
+      .button span {
+        font-size: 1.2rem;
+        font-weight: 400;
+        line-height: 0;
+      }
+      .announcement {
+        background: var(--forest);
+        color: #dddcd3;
+      }
+      .announcement .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 38px;
+        gap: 20px;
+        font-size: 0.68rem;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+      }
+      .announcement a:hover {
+        color: var(--bronzeLight);
+      }
+      .site-header {
+        background: var(--paper);
+        position: relative;
+        z-index: 5;
+      }
+      .header-inner {
+        height: 104px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        flex-shrink: 0;
+      }
+      .brand-mark {
+        width: 43px;
+        height: 55px;
+        border: 1px solid var(--bronze);
+        display: grid;
+        place-items: center;
+        color: var(--bronze);
+        font: normal 2rem/1 var(--display);
+        letter-spacing: -0.1em;
+        padding-right: 5px;
+      }
+      .brand-name {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+      .brand-name b {
+        font: normal 1.65rem/1 var(--display);
+        letter-spacing: 0.17em;
+      }
+      .brand-name small {
+        color: var(--bronze-text);
+        font-size: 0.56rem;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+        margin-top: 8px;
+        font-weight: 700;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(18px, 2.3vw, 40px);
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .nav a:not(.nav-cta):hover {
+        color: var(--bronze);
+      }
+      .nav-cta {
+        border: 1px solid var(--forest);
+        padding: 16px 19px;
+        white-space: nowrap;
+      }
+      .nav-cta:hover {
+        background: var(--forest);
+        color: white;
+      }
+      .menu-button {
+        display: none;
+        background: none;
+        border: 1px solid var(--forest);
+        color: var(--forest);
+        padding: 8px 14px;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .hero {
+        background: var(--paper);
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 43% 57%;
+        min-height: 735px;
+      }
+      .hero-copy {
+        padding: clamp(55px, 6vw, 104px) 60px 55px
+          max(54px, calc((100vw - 1420px) / 2));
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+      }
+      .hero-copy:before {
+        content: "01 / 03";
+        position: absolute;
+        bottom: 46px;
+        left: max(54px, calc((100vw - 1420px) / 2));
+        color: var(--bronze-text);
+        font: italic 1rem var(--display);
+      }
+      .hero-kicker {
+        color: var(--bronze-text);
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin: 0 0 34px;
+      }
+      .hero h1 {
+        font: normal clamp(4rem, 6.4vw, 7.2rem) / 0.96 var(--display);
+        letter-spacing: -0.075em;
+        margin: 0;
+        max-width: 610px;
+      }
+      .hero h1 em {
+        display: block;
+        font-weight: normal;
+        color: var(--bronze);
+      }
+      .hero-lead {
+        margin: 34px 0 35px;
+        font-size: 1.03rem;
+        line-height: 1.83;
+        color: #5b6863;
+        max-width: 420px;
+      }
+      .hero-photo {
+        position: relative;
+        min-height: 735px;
+        background: #65716a;
+        overflow: hidden;
+      }
+      .hero-photo img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: 51% center;
+        filter: saturate(0.85) contrast(1.04);
+      }
+      .hero-photo picture {
+        display: block;
+        height: 100%;
+      }
+      .hero-photo:after {
+        content: "";
+        position: absolute;
+        inset: 40% 0 0;
+        background: linear-gradient(0deg, rgba(12, 27, 25, 0.58), transparent);
+        pointer-events: none;
+      }
+      .photo-note {
+        position: absolute;
+        z-index: 1;
+        bottom: 44px;
+        left: 52px;
+        color: #fff;
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+        font-size: 0.68rem;
+        font-weight: 700;
+      }
+      .photo-note:before {
+        content: "";
+        display: block;
+        width: 45px;
+        height: 1px;
+        background: var(--bronzeLight);
+        margin-bottom: 18px;
+      }
+      .hero-vertical {
+        position: absolute;
+        z-index: 1;
+        right: 32px;
+        top: 38px;
+        writing-mode: vertical-rl;
+        color: #fff;
+        font-size: 0.62rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+      }
+      .reservation {
+        background: var(--forest);
+        color: white;
+      }
+      .reservation-inner {
+        min-height: 135px;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: 30px;
+      }
+      .reservation-text {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+      }
+      .reservation-symbol {
+        font: italic 3.5rem/1 var(--display);
+        color: var(--bronzeLight);
+      }
+      .reservation strong {
+        display: block;
+        font: normal 1.72rem/1.25 var(--display);
+        letter-spacing: -0.025em;
+      }
+      .reservation p {
+        font-size: 0.75rem;
+        color: #adbab2;
+        letter-spacing: 0.08em;
+        margin: 4px 0 0;
+      }
+      .reservation .button {
+        background: var(--bronzeLight);
+        color: var(--forest);
+      }
+      .reservation .button:hover {
+        background: #dfc59a;
+      }
+      .intro {
+        padding: 145px 0 150px;
+      }
+      .intro-grid {
+        display: grid;
+        grid-template-columns: 1.13fr 0.87fr;
+        gap: 11vw;
+        align-items: start;
+      }
+      .intro h2 {
+        max-width: 730px;
+      }
+      .intro-right {
+        padding-top: 31px;
+      }
+      .intro-right p {
+        font-size: 1.12rem;
+        line-height: 1.92;
+        color: #5d6965;
+        max-width: 500px;
+        margin: 0 0 28px;
+      }
+      .stat-line {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-top: 40px;
+        border-top: 1px solid var(--rule);
+        padding-top: 24px;
+      }
+      .stat-line b {
+        font: normal 3rem/1 var(--display);
+        color: var(--bronze);
+      }
+      .stat-line span {
+        font-size: 0.75rem;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .rooms {
+        background: #ebe9e2;
+        padding: 110px 0 125px;
+      }
+      .rooms-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 35px;
+        margin-bottom: 50px;
+      }
+      .rooms-head p:last-child {
+        max-width: 320px;
+        color: var(--muted);
+        font-size: 0.96rem;
+        line-height: 1.8;
+        margin: 0 0 6px;
+      }
+      .featured {
+        display: grid;
+        grid-template-columns: 58% 42%;
+        background: var(--forest);
+        color: white;
+        min-height: 570px;
+      }
+      .featured-image {
+        position: relative;
+        min-height: 570px;
+        overflow: hidden;
+      }
+      .featured-image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center 55%;
+      }
+      .featured-image span {
+        position: absolute;
+        left: 28px;
+        bottom: 25px;
+        background: rgba(23, 40, 39, 0.83);
+        padding: 10px 14px;
+        color: #e5dbca;
+        font-size: 0.65rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .featured-copy {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 60px clamp(35px, 5vw, 90px);
+      }
+      .featured-copy .section-label {
+        color: var(--bronzeLight);
+      }
+      .featured h3 {
+        font: normal clamp(3.4rem, 5vw, 6rem) / 1 var(--display);
+        letter-spacing: -0.06em;
+        margin: 0 0 27px;
+      }
+      .featured p {
+        color: #c6cfca;
+        line-height: 1.83;
+        margin: 0 0 36px;
+        max-width: 380px;
+      }
+      .featured .arrow-link {
+        align-self: flex-start;
+        color: #e4c498;
+      }
+      .featured-facts {
+        display: flex;
+        gap: 25px;
+        flex-wrap: wrap;
+        padding-top: 23px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        margin-bottom: 35px;
+        color: #d6dbd3;
+        font-size: 0.69rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      .room-pair {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 34px;
+        margin-top: 34px;
+      }
+      .room-pair article {
+        background: var(--paper);
+      }
+      .room-pair .image {
+        height: 350px;
+        overflow: hidden;
+      }
+      .room-pair img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+      .room-pair article:hover img {
+        transform: scale(1.03);
+      }
+      .room-pair .content {
+        padding: 33px 37px 39px;
+      }
+      .room-pair .meta {
+        font-size: 0.67rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--bronze-text);
+        font-weight: 700;
+      }
+      .room-pair h3 {
+        font: normal 2.65rem/1.14 var(--display);
+        letter-spacing: -0.04em;
+        margin: 10px 0 12px;
+      }
+      .room-pair p {
+        color: var(--muted);
+        line-height: 1.75;
+        max-width: 480px;
+        margin: 0 0 25px;
+      }
+      .room-pair .arrow-link {
+        color: var(--forest);
+      }
+      .experience {
+        padding: 145px 0;
+        background: var(--paper);
+      }
+      .experience-grid {
+        display: grid;
+        grid-template-columns: 0.93fr 1.07fr;
+        gap: 9vw;
+        align-items: center;
+      }
+      .experience-images {
+        height: 610px;
+        position: relative;
+        padding-right: 18%;
+        padding-bottom: 15%;
+      }
+      .experience-images .primary {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 22%;
+      }
+      .experience-images .secondary {
+        position: absolute;
+        width: 39%;
+        height: 44%;
+        right: 0;
+        bottom: 0;
+        object-fit: cover;
+        border: 9px solid var(--paper);
+      }
+      .experience-copy .display {
+        max-width: 640px;
+      }
+      .experience-copy > p:not(.section-label) {
+        font-size: 1.05rem;
+        color: var(--muted);
+        line-height: 1.85;
+        max-width: 500px;
+        margin: 28px 0 32px;
+      }
+      .service-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 32px;
+        border-top: 1px solid var(--rule);
+      }
+      .service-list span {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--rule);
+        font-size: 0.85rem;
+      }
+      .service-list span:before {
+        content: "—";
+        color: var(--bronze);
+        padding-right: 11px;
+      }
+      .location {
+        background: #e6e2d8;
+        padding: 110px 0;
+      }
+      .location-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 9vw;
+        align-items: center;
+      }
+      .location-copy > p:not(.section-label) {
+        color: #596763;
+        font-size: 1.06rem;
+        line-height: 1.85;
+        max-width: 480px;
+        margin: 27px 0;
+      }
+      .location-address {
+        border-top: 1px solid #c9c8be;
+        padding-top: 22px;
+        margin: 35px 0;
+        font-size: 0.82rem;
+        line-height: 1.8;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+      .location-image {
+        height: 495px;
+        position: relative;
+        background: #86928b;
+      }
+      .location-image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        object-position: center 40%;
+        filter: saturate(0.8);
+      }
+      .location-image span {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: var(--forest);
+        color: #fff;
+        padding: 17px 23px;
+        font-size: 0.67rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+      }
+      .final-cta {
+        background: var(--forest);
+        color: white;
+        text-align: center;
+        padding: 110px 20px 115px;
+      }
+      .final-cta .section-label {
+        justify-content: center;
+        color: var(--bronzeLight);
+      }
+      .final-cta h2 {
+        font: normal clamp(3.1rem, 5.6vw, 6rem) / 1 var(--display);
+        letter-spacing: -0.055em;
+        margin: 0 auto 32px;
+        max-width: 850px;
+      }
+      .final-cta .button {
+        background: var(--bronzeLight);
+        color: var(--forest);
+      }
+      .final-cta .button:hover {
+        background: #dfc59a;
+      }
+      .footer {
+        background: #10201e;
+        color: #d0d5cb;
+        padding: 55px 0 27px;
+      }
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 35px;
+        align-items: start;
+      }
+      .footer .brand-mark {
+        color: var(--bronzeLight);
+        border-color: var(--bronzeLight);
+      }
+      .footer .brand-name small {
+        color: var(--bronzeLight);
+      }
+      .footer-links {
+        display: flex;
+        gap: clamp(18px, 3vw, 50px);
+        align-items: center;
+        flex-wrap: wrap;
+        font-size: 0.77rem;
+      }
+      .footer-links a:hover {
+        color: var(--bronzeLight);
+      }
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        color: #8e9c95;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
+        padding-top: 22px;
+        margin-top: 55px;
+        font-size: 0.68rem;
+        letter-spacing: 0.04em;
+      }
+      @media (max-width: 1150px) {
+        .container {
+          width: calc(100% - 64px);
+        }
+        .nav {
+          gap: 15px;
+        }
+        .hero-copy {
+          padding-left: 32px;
+          padding-right: 35px;
+        }
+        .hero-copy:before {
+          left: 32px;
+        }
+        .hero h1 {
+          font-size: clamp(3.5rem, 6vw, 6rem);
+        }
+        .featured-copy {
+          padding: 40px;
+        }
+        .experience-grid {
+          gap: 5vw;
+        }
+      }
+      @media (max-width: 850px) {
+        .nav {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: var(--paper);
+          border-top: 1px solid var(--rule);
+          padding: 22px 32px 30px;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 20px;
+          box-shadow: 0 18px 30px rgba(0, 0, 0, 0.12);
+        }
+        .nav.open {
+          display: flex;
+        }
+        .nav-cta {
+          text-align: center;
+        }
+        .menu-button {
+          display: block;
+        }
+        .header-inner {
+          height: 85px;
+        }
+        .hero-grid {
+          grid-template-columns: 1fr 1fr;
+          min-height: 600px;
+        }
+        .hero-copy {
+          padding-top: 65px;
+          padding-bottom: 95px;
+        }
+        .hero-photo {
+          min-height: 600px;
+        }
+        .hero-lead {
+          font-size: 0.95rem;
+        }
+        .intro-grid {
+          gap: 5vw;
+        }
+        .featured h3 {
+          font-size: 3.6rem;
+        }
+        .featured-copy {
+          padding: 35px;
+        }
+        .featured-image,
+        .featured {
+          min-height: 500px;
+        }
+        .experience-images {
+          height: 500px;
+        }
+      }
+      @media (max-width: 680px) {
+        .container {
+          width: calc(100% - 40px);
+        }
+        .announcement .container {
+          justify-content: center;
+        }
+        .announcement .container span:last-child {
+          display: none;
+        }
+        .brand-name b {
+          font-size: 1.35rem;
+        }
+        .brand-mark {
+          width: 37px;
+          height: 48px;
+          font-size: 1.7rem;
+        }
+        .hero-grid {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+        }
+        .hero-copy {
+          padding: 65px 20px 70px;
+        }
+        .hero-copy:before {
+          display: none;
+        }
+        .hero h1 {
+          font-size: clamp(3.9rem, 13vw, 6.4rem);
+        }
+        .hero-lead {
+          font-size: 1rem;
+          max-width: 520px;
+        }
+        .hero-photo {
+          min-height: 0;
+          height: 380px;
+        }
+        .photo-note {
+          bottom: 24px;
+          left: 24px;
+        }
+        .hero-vertical {
+          right: 18px;
+          top: 22px;
+        }
+        .reservation-inner {
+          display: block;
+          padding-block: 24px;
+        }
+        .reservation-text {
+          gap: 15px;
+          margin-bottom: 17px;
+        }
+        .reservation-symbol {
+          font-size: 2.7rem;
+        }
+        .reservation strong {
+          font-size: 1.45rem;
+        }
+        .reservation .button {
+          width: 100%;
+        }
+        .intro {
+          padding: 85px 0;
+        }
+        .intro-grid,
+        .experience-grid,
+        .location-grid {
+          grid-template-columns: 1fr;
+          gap: 28px;
+        }
+        .intro-right {
+          padding: 0;
+        }
+        .intro-right p {
+          font-size: 1.03rem;
+        }
+        .display {
+          font-size: clamp(3rem, 10vw, 4.5rem);
+        }
+        .rooms {
+          padding: 80px 0;
+        }
+        .rooms-head {
+          display: block;
+          margin-bottom: 32px;
+        }
+        .rooms-head p:last-child {
+          margin-top: 22px;
+        }
+        .featured {
+          display: block;
+        }
+        .featured-image {
+          height: 360px;
+          min-height: 0;
+        }
+        .featured-copy {
+          padding: 38px 30px 43px;
+        }
+        .featured h3 {
+          font-size: 3.8rem;
+        }
+        .room-pair {
+          grid-template-columns: 1fr;
+          gap: 20px;
+          margin-top: 20px;
+        }
+        .room-pair .image {
+          height: 300px;
+        }
+        .room-pair .content {
+          padding: 27px;
+        }
+        .experience {
+          padding: 85px 0;
+        }
+        .experience-copy {
+          order: 1;
+        }
+        .experience-images {
+          order: 2;
+          height: 470px;
+          padding-right: 16%;
+          padding-bottom: 14%;
+        }
+        .location {
+          padding: 80px 0;
+        }
+        .location-image {
+          height: 340px;
+        }
+        .final-cta {
+          padding: 82px 20px;
+        }
+        .footer-top,
+        .footer-bottom {
+          display: block;
+        }
+        .footer-links {
+          margin-top: 32px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+        .footer-bottom span {
+          display: block;
+          margin-bottom: 10px;
+        }
+      }
+      @media (max-width: 380px) {
+        .hero h1 {
+          font-size: 3.45rem;
+        }
+        .brand-name b {
+          font-size: 1.2rem;
+        }
+        .brand-name small {
+          font-size: 0.48rem;
+        }
+        .service-list {
+          column-gap: 12px;
+        }
+        .service-list span {
+          font-size: 0.75rem;
+        }
+        .room-pair .image {
+          height: 245px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *:before,
+        *:after {
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Ir al contenido</a>
+    <div class="announcement">
+      <div class="container">
+        <span>Kepler 147 · Verónica Anzúres · Ciudad de México</span
+        ><span
+          ><a href="tel:+525536668535"
+            >Reservaciones&nbsp;+52&nbsp;55&nbsp;3666&nbsp;8535</a
+          ></span
+        >
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          href="#inicio"
+          class="brand"
+          ><span class="brand-mark">K</span
+          ><span class="brand-name"
+            ><b>KEPLER</b><small>Business Suites</small></span
+          ></a
+        ><button
+          type="button"
+          class="menu-button"
+          aria-controls="menu"
+          aria-expanded="false"
+        >
+          Menú
+        </button>
+        <nav id="menu" class="nav" aria-label="Navegación principal">
+          <a href="#concepto">El concepto</a><a href="#suites">Suites</a
+          ><a href="#servicios">Servicios</a><a href="#ubicacion">Ubicación</a
+          ><a
+            class="nav-cta"
+            href="https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Reservar ahora (se abre en una pestaña nueva)"
+            >Reservar ahora ↗</a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="contenido" tabindex="-1">
+      <section class="hero" id="inicio">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-kicker">Business Suites · Ciudad de México</p>
+            <h1>Un lugar<br />para <em>quedarte.</em></h1>
+            <p class="hero-lead">
+              La libertad de sentirte en casa, con el cuidado de una estancia de
+              hotel. Descubre un espacio para vivir la ciudad a tu manera.
+            </p>
+            <a class="arrow-link" href="#suites"
+              >Descubre nuestras suites <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="hero-photo">
+            <picture>
+              <source
+                type="image/webp"
+                srcset="
+                  assets/grand-suite-four-768.webp  768w,
+                  assets/grand-suite-four.webp     1501w
+                "
+                sizes="(max-width: 680px) 100vw, 57vw"
+              />
+              <img
+                src="assets/grand-suite-four.jpg"
+                alt="Sala y comedor de una Grand Suite en Business Suites Kepler"
+                width="1501"
+                height="1000"
+                fetchpriority="high"
+              />
+            </picture>
+            <span class="hero-vertical">Verónica Anzúres · Polanco</span
+            ><span class="photo-note">Grand Suite · Kepler</span>
+          </div>
+        </div>
+      </section>
+      <section class="reservation" aria-label="Reservación">
+        <div class="container reservation-inner">
+          <div class="reservation-text">
+            <span class="reservation-symbol" aria-hidden="true">K.</span>
+            <div>
+              <strong>La ciudad te espera.</strong>
+              <p>Consulta fechas, tarifas y disponibilidad en tiempo real.</p>
+            </div>
+          </div>
+          <a
+            class="button"
+            href="https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Consultar disponibilidad (se abre en una pestaña nueva)"
+            >Consultar disponibilidad <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <section class="intro" id="concepto">
+        <div class="container intro-grid">
+          <div>
+            <p class="section-label">01 / La experiencia Kepler</p>
+            <h2 class="display">
+              Tu propia forma de <em>estar en la ciudad.</em>
+            </h2>
+          </div>
+          <div class="intro-right">
+            <p>
+              A dos calles de Liverpool Polanco, Business Suites Kepler reúne la
+              privacidad de un departamento y los servicios de un hotel en una
+              ubicación ideal para viajes de trabajo o de placer.
+            </p>
+            <p>
+              Quédate unos días en una habitación acogedora o instala tu rutina
+              en una Grand Suite con sala, comedor y cocina. Cada estancia tiene
+              el espacio que necesita.
+            </p>
+            <div class="stat-line">
+              <b>13</b
+              ><span>habitaciones y suites<br />para elegir tu estancia</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="rooms" id="suites">
+        <div class="container">
+          <div class="rooms-head">
+            <div>
+              <p class="section-label">02 / Los espacios</p>
+              <h2 class="display">Quédate a tu manera.</h2>
+            </div>
+            <p>
+              Habitaciones para lo esencial. Suites para dejar que la estancia
+              se extienda.
+            </p>
+          </div>
+          <article class="featured">
+            <div class="featured-image">
+              <img
+                src="assets/grand-suite-two.jpg"
+                alt="Amplia sala y comedor de una Grand Suite"
+                loading="lazy"
+                width="1334"
+                height="1000"
+              /><span>Fotografía de la propiedad</span>
+            </div>
+            <div class="featured-copy">
+              <p class="section-label">Nuestra suite más amplia</p>
+              <h3>Grand<br />Suite.</h3>
+              <p>
+                Tu propia dirección temporal en la ciudad. Cocina equipada, sala
+                y comedor para compartir el día, trabajar con calma o quedarte
+                un poco más.
+              </p>
+              <div class="featured-facts">
+                <span>80–95 m²</span><span>Dos camas</span
+                ><span>Cocina y sala</span>
+              </div>
+              <a
+                class="arrow-link"
+                href="https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Consultar disponibilidad de Grand Suite (se abre en una pestaña nueva)"
+                >Consultar disponibilidad <span aria-hidden="true">↗</span></a
+              >
+            </div>
+          </article>
+          <div class="room-pair">
+            <article>
+              <div class="image">
+                <img
+                  src="assets/king.jpg"
+                  alt="Habitación King con cama y escritorio"
+                  loading="lazy"
+                  width="1439"
+                  height="942"
+                />
+              </div>
+              <div class="content">
+                <span class="meta">30 m² / Cama King</span>
+                <h3>Habitación King</h3>
+                <p>
+                  Amplitud para descansar o trabajar, con balcón y acceso a una
+                  cocineta fuera de la habitación.
+                </p>
+                <a
+                  class="arrow-link"
+                  href="https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Explorar disponibilidad de Habitación King (se abre en una pestaña nueva)"
+                  >Explorar disponibilidad <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+            <article>
+              <div class="image">
+                <img
+                  src="assets/queen.jpg"
+                  alt="Habitación Queen con cama y área de trabajo"
+                  loading="lazy"
+                  width="1334"
+                  height="1000"
+                />
+              </div>
+              <div class="content">
+                <span class="meta">27 m² / Cama Queen</span>
+                <h3>Habitación Queen</h3>
+                <p>
+                  Un espacio sereno y funcional con escritorio, baño privado y
+                  lo esencial para disfrutar la ciudad.
+                </p>
+                <a
+                  class="arrow-link"
+                  href="https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Explorar disponibilidad de Habitación Queen (se abre en una pestaña nueva)"
+                  >Explorar disponibilidad <span aria-hidden="true">↗</span></a
+                >
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="experience" id="servicios">
+        <div class="container experience-grid">
+          <div class="experience-images">
+            <img
+              class="primary"
+              src="assets/grand-suite.jpg"
+              alt="Mesa de comedor de una Grand Suite"
+              loading="lazy"
+              width="667"
+              height="1000"
+            /><img
+              class="secondary"
+              src="assets/patio.jpg"
+              alt="Patio privado en una Grand Suite"
+              loading="lazy"
+              width="750"
+              height="1000"
+            />
+          </div>
+          <div class="experience-copy">
+            <p class="section-label">03 / Pensado para tu estancia</p>
+            <h2 class="display">
+              Los pequeños detalles <em>hacen el lugar.</em>
+            </h2>
+            <p>
+              Un espacio al que quieres volver al terminar el día. La comodidad
+              de instalarte con libertad, con servicios que acompañan tu
+              estancia.
+            </p>
+            <div class="service-list">
+              <span>Wi-Fi en las habitaciones</span><span>Limpieza diaria</span
+              ><span>Espacio para trabajar</span><span>Caja de seguridad</span
+              ><span>Estacionamiento limitado</span
+              ><span>Facturación disponible</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="location" id="ubicacion">
+        <div class="container location-grid">
+          <div class="location-copy">
+            <p class="section-label">04 / El entorno</p>
+            <h2 class="display">Todo cerca.<br /><em>Tiempo para ti.</em></h2>
+            <p>
+              En Verónica Anzúres, a dos calles de Liverpool Polanco, tendrás un
+              punto de partida práctico para recorrer Ciudad de México.
+            </p>
+            <div class="location-address">
+              Kepler 147, Verónica Anzúres<br />Miguel Hidalgo, Ciudad de México
+              11590
+            </div>
+            <a
+              class="arrow-link"
+              href="https://www.google.com/maps/search/?api=1&query=Kepler+147%2C+Ver%C3%B3nica+Anz%C3%BAres%2C+Ciudad+de+M%C3%A9xico"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Ver cómo llegar (se abre en una pestaña nueva)"
+              >Ver cómo llegar <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="location-image">
+            <img
+              src="assets/fachada.jpg"
+              alt="Fachada de Business Suites Kepler"
+              loading="lazy"
+              width="700"
+              height="490"
+            /><span>Kepler 147 / CDMX</span>
+          </div>
+        </div>
+      </section>
+      <section class="final-cta">
+        <p class="section-label">Business Suites Kepler</p>
+        <h2>Tu próxima estancia<br />empieza aquí.</h2>
+        <a
+          class="button"
+          href="https://hotels.cloudbeds.com/es/reservation/lSYkcf?currency=mxn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Reservar en línea (se abre en una pestaña nueva)"
+          >Reservar en línea <span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a
+            href="#inicio"
+            class="brand"
+            ><span class="brand-mark">K</span
+            ><span class="brand-name"
+              ><b>KEPLER</b><small>Business Suites</small></span
+            ></a
+          >
+          <div class="footer-links">
+            <a href="tel:+525536668535">+52&nbsp;55&nbsp;3666&nbsp;8535</a
+            ><a href="mailto:reservaskepler@gmail.com"
+              >reservaskepler@gmail.com</a
+            ><a href="#ubicacion">Kepler 147, Ciudad de México</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© Business Suites Kepler</span
+          ><span
+            >Tarifas, condiciones y disponibilidad sujetas al motor de
+            reservas.</span
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      const menuButton = document.querySelector(".menu-button");
+      const nav = document.querySelector(".nav");
+      const setMenuState = (open) => {
+        nav.classList.toggle("open", open);
+        menuButton.setAttribute("aria-expanded", String(open));
+        menuButton.textContent = open ? "Cerrar" : "Menú";
+      };
+      const closeMenu = () => setMenuState(false);
+      menuButton.addEventListener("click", () =>
+        setMenuState(!nav.classList.contains("open")),
+      );
+      nav
+        .querySelectorAll("a")
+        .forEach((link) => link.addEventListener("click", closeMenu));
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && nav.classList.contains("open")) {
+          closeMenu();
+          menuButton.focus();
+        }
+      });
+      const desktopMenu = window.matchMedia("(min-width: 851px)");
+      if (desktopMenu.addEventListener) {
+        desktopMenu.addEventListener("change", closeMenu);
+      } else {
+        desktopMenu.addListener(closeMenu);
+      }
+    </script>
+  </body>
+</html>
