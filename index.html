@@ -242,6 +242,7 @@
         font-weight: 700;
       }
       .nav {
+        margin-left: auto;
         display: flex;
         align-items: center;
         gap: clamp(18px, 2.3vw, 40px);
@@ -270,10 +271,17 @@
         font-size: 0.7rem;
         font-weight: 700;
       }
-      .language-switch a { padding: 8px 3px; }
+      .language-switch a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px 3px;
+        line-height: 1.2;
+        border-bottom: 2px solid transparent;
+      }
       .language-switch a[aria-current="page"] {
         color: var(--navy);
-        border-bottom: 2px solid currentColor;
+        border-bottom-color: currentColor;
       }
       .menu-button {
         display: none;
@@ -811,6 +819,7 @@
           text-align: center;
         }
         .menu-button {
+          margin-left: auto;
           display: block;
         }
         .header-inner {
