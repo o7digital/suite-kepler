@@ -8,6 +8,7 @@ import { chromium } from '@playwright/test';
 let server, browser, base;
 const pairs = [
   ['/', '/en/'], ['/privacy-policy/', '/en/privacy-policy/'],
+  ['/ubicacion/', '/en/location/'],
   ['/habitaciones/grand-suite/', '/en/rooms/grand-suite/'],
   ['/habitaciones/king/', '/en/rooms/king/'],
   ['/habitaciones/queen/', '/en/rooms/queen/'],
@@ -85,9 +86,19 @@ for (const route of routes) {
         assert.equal(await page.locator('.room-pair a.arrow-link').count(), 2);
       } else {
         assert.match(await page.locator('h1').innerText(), /Polanco/);
-        for (const paths of pairs.slice(2)) {
+        for (const paths of pairs.slice(3)) {
           assert.ok(await page.locator(`main a[href="${paths[lang === 'es' ? 0 : 1]}"]`).count() >= 1);
         }
+      }
+    }
+    if (route === '/ubicacion/' || route === '/en/location/') {
+      const body = await page.locator('main').innerText();
+      for (const landmark of ['Kepler 147', 'Mariano Escobedo 425', 'Marina Nacional 329', 'Chapultepec']) {
+        assert.ok(body.includes(landmark), `Missing location reference: ${landmark}`);
+      }
+      assert.doesNotMatch(body, /Ángel de la Independencia|Zona Rosa/);
+      for (const roomPair of pairs.slice(3)) {
+        assert.equal(await page.locator(`main a[href="${roomPair[lang === 'es' ? 0 : 1]}"]`).count(), 1);
       }
     }
     // Check all initial internal links and their section targets before click handlers mutate them.

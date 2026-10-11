@@ -1,5 +1,5 @@
 ---
-import { homePaths, hotel, privacyPaths, type Language } from '../data/hotel';
+import { homePaths, hotel, privacyPaths, locationPaths, type Language } from '../data/hotel';
 interface Props { lang: Language; home?: boolean; }
 const { lang, home = false } = Astro.props;
 ---
@@ -16,6 +16,7 @@ const { lang, home = false } = Astro.props;
             ></a
           >
           <div class="footer-links">
+            <a href={locationPaths[lang]}>{lang === 'es' ? 'Ubicación y alrededores' : 'Location and surroundings'}</a>
             <a href={privacyPaths[lang]}>{lang === 'es' ? 'Aviso de privacidad' : 'Privacy notice'}</a>
             <a href={`tel:${hotel.telephone}`}>+52&nbsp;55&nbsp;3666&nbsp;8535</a
             ><a href={`mailto:${hotel.email}`}

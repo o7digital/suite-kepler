@@ -3,7 +3,7 @@ import SiteLayout from './SiteLayout.astro';
 import SeoHead from '../components/SeoHead.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { bookingUrl, commonAmenities, homePaths, mapUrl, type Language } from '../data/hotel';
+import { bookingUrl, commonAmenities, homePaths, locationPaths, mapUrl, type Language } from '../data/hotel';
 import { rooms, roomSchema, type Room } from '../data/rooms';
 import '../styles/room.css';
 interface Props { room: Room; lang: Language; }
@@ -107,6 +107,7 @@ const labels = spanish ? {
           <p class="section-label">Kepler 147 · {labels.city}</p>
           <h2 class="display">{labels.location}</h2>
           <p>{labels.locationText}</p>
+          <p><a class="arrow-link" href={locationPaths[lang]}>{spanish ? 'Ubicación y alrededores' : 'Location and surroundings'} <span aria-hidden="true">↗</span></a></p>
           <div class="location-address">Kepler 147, Verónica Anzúres<br />Miguel Hidalgo, {labels.city} 11590</div>
           <a class="arrow-link" href={mapUrl} target="_blank" rel="noopener noreferrer" aria-label={labels.directionsAria}>
             {labels.directions} <span aria-hidden="true">↗</span>

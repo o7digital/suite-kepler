@@ -21,6 +21,7 @@ export const hotel = {
 };
 
 export const homePaths: LocalizedPaths = { es: '/', en: '/en/' };
+export const locationPaths: LocalizedPaths = { es: '/ubicacion/', en: '/en/location/' };
 export const privacyPaths: LocalizedPaths = { es: '/privacy-policy/', en: '/en/privacy-policy/' };
 export const bookingUrl = (lang: Language) =>
   `https://hotels.cloudbeds.com/${lang}/reservation/lSYkcf?currency=mxn`;
@@ -40,8 +41,8 @@ export function hotelSchema(lang: Language) {
     name: hotel.name,
     url: absoluteUrl('/'),
     description: lang === 'es'
-      ? 'Habitaciones y suites con cocina en Verónica Anzúres, cerca de Polanco, Ciudad de México.'
-      : 'Rooms and suites with kitchens in Verónica Anzúres, near Polanco, Mexico City.',
+      ? 'Habitaciones y suites en Verónica Anzúres, cerca de Polanco, Ciudad de México. Grand Suites con cocina equipada para viajes de trabajo y estancias largas.'
+      : 'Rooms and suites in Verónica Anzúres, near Polanco, Mexico City. Grand Suites with equipped kitchens for business trips and longer stays.',
     image: ['/assets/fachada.webp', '/assets/grand-suite-four.webp', '/assets/king.webp', '/assets/queen.webp'].map(absoluteUrl),
     telephone: hotel.telephone,
     email: hotel.email,

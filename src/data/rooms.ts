@@ -1,4 +1,4 @@
-import { absoluteUrl, homePaths, hotelSchema, privacyPaths, type Language, type LocalizedPaths } from './hotel';
+import { absoluteUrl, homePaths, hotelSchema, privacyPaths, locationPaths, type Language, type LocalizedPaths } from './hotel';
 
 type RoomContent = {
   name: string;
@@ -44,10 +44,10 @@ export const rooms: Room[] = [
       description: 'Grand Suite de 80–95 m² con dos camas, cocina equipada, sala y comedor en Verónica Anzúres, CDMX. Consulta disponibilidad en Business Suites Kepler.',
       heading: 'Grand Suite', emphasis: 'con cocina.',
       lead: 'Entre 80 y 95 m² para instalarte en Ciudad de México: dos camas, cocina equipada, sala y comedor, en Verónica Anzúres, cerca de Polanco.',
-      introTitle: 'Un departamento para tu estancia en CDMX.',
+      introTitle: 'Suite con cocina equipada en Anzúres.',
       paragraphs: [
         'La Grand Suite es el espacio más amplio de Business Suites Kepler. Su cocina está dentro de la suite, junto con una sala y un comedor: ambientes para preparar alimentos, compartir una mesa y descansar sin limitar toda tu estancia a la habitación.',
-        'Es una opción para quienes buscan espacio durante un viaje de trabajo o una visita más larga a Ciudad de México. Puedes organizar el día entre la sala y el comedor y volver a tu propio espacio después de recorrer la zona.',
+        'Si buscas suites para estancias largas cerca de Polanco, la Grand Suite ofrece espacio para organizar tu rutina durante un viaje de trabajo o una visita prolongada a CDMX. Combina la comodidad de un departamento con servicios de hotel en Anzúres: Wi-Fi, limpieza diaria y facturación disponible. Consulta las condiciones y tarifas para tus fechas en el motor de reservas.',
         'Las Grand Suites tienen superficies de entre 80 y 95 m². Al consultar fechas en el motor de reservas podrás revisar las unidades disponibles y sus características antes de elegir tu estancia.',
       ],
       facts: ['80–95 m²', 'Dos camas', 'Cocina dentro de la suite', 'Sala y comedor'],
@@ -155,7 +155,7 @@ export const rooms: Room[] = [
   },
 ];
 
-export const localizedPages: LocalizedPaths[] = [homePaths, privacyPaths, ...rooms.map(room => room.paths)];
+export const localizedPages: LocalizedPaths[] = [homePaths, privacyPaths, locationPaths, ...rooms.map(room => room.paths)];
 
 export function roomSchema(room: Room, lang: Language) {
   const content = room[lang];
