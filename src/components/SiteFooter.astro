@@ -1,5 +1,6 @@
 ---
 import { homePaths, hotel, privacyPaths, locationPaths, type Language } from '../data/hotel';
+import { footerKeywords } from '../data/keywords';
 interface Props { lang: Language; home?: boolean; }
 const { lang, home = false } = Astro.props;
 ---
@@ -24,6 +25,12 @@ const { lang, home = false } = Astro.props;
             ><a href={home ? '#ubicacion' : `${homePaths[lang]}#ubicacion`}>Kepler 147, {lang === 'es' ? 'Ciudad de México' : 'Mexico City'}</a>
           </div>
         </div>
+        <section class="footer-keywords" aria-label={lang === 'es' ? 'Alojamiento y alrededores' : 'Accommodation and surroundings'}>
+          <h2>{lang === 'es' ? 'Alojamiento y alrededores' : 'Accommodation and surroundings'}</h2>
+          <ul>
+            {footerKeywords[lang].map(keyword => <li>{keyword}</li>)}
+          </ul>
+        </section>
         <div class="footer-bottom">
           <span>© Business Suites Kepler</span
           ><span
