@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import SeoHead from '../components/SeoHead.astro';
 import SiteHeader from '../components/SiteHeader.astro';
+import ContactForm from '../components/ContactForm.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { homePaths, hotelSchema } from '../data/hotel';
 import { rooms } from '../data/rooms';
@@ -291,6 +292,7 @@ const paths = homePaths;
           </div>
         </div>
       </section>
+      <ContactForm lang={lang} />
       <section class="final-cta">
         <p class="section-label">Business Suites Kepler</p>
         <h2>Tu próxima estancia<br />empieza aquí.</h2>

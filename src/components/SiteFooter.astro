@@ -17,6 +17,7 @@ const { lang, home = false } = Astro.props;
             ></a
           >
           <div class="footer-links">
+            <a href={`${homePaths[lang]}#contacto`}>{lang === 'es' ? 'Contacto' : 'Contact'}</a>
             <a href={locationPaths[lang]}>{lang === 'es' ? 'Ubicación y alrededores' : 'Location and surroundings'}</a>
             <a href={privacyPaths[lang]}>{lang === 'es' ? 'Aviso de privacidad' : 'Privacy notice'}</a>
             <a href={`tel:${hotel.telephone}`}>+52&nbsp;55&nbsp;3666&nbsp;8535</a

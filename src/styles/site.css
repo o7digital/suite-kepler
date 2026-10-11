@@ -1041,3 +1041,70 @@
   gap: 18px 28px;
 }
 .featured h3 a:hover, .room-pair h3 a:hover { text-decoration: underline; text-underline-offset: 6px; }
+
+      .contact {
+        padding: 90px 0;
+        border-top: 1px solid var(--rule);
+      }
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(32px, 7vw, 100px);
+      }
+      .contact-grid > div > p:not(.section-label) {
+        color: var(--muted);
+        margin: 28px 0;
+      }
+      .contact-form {
+        display: grid;
+        gap: 18px;
+        min-width: 0;
+      }
+      .contact-form label {
+        display: grid;
+        gap: 8px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+      .contact-form input:not([type="hidden"]),
+      .contact-form textarea {
+        width: 100%;
+        min-width: 0;
+        padding: 12px 14px;
+        border: 1px solid var(--rule);
+        border-radius: 0;
+        background: var(--white);
+        color: var(--text);
+        font: 1rem/1.5 var(--sans);
+      }
+      .contact-form textarea {
+        resize: vertical;
+      }
+      .contact-form input:focus-visible,
+      .contact-form textarea:focus-visible {
+        outline: 2px solid var(--bronze);
+        outline-offset: 2px;
+      }
+      .contact-privacy {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+      .contact-privacy a {
+        text-decoration: underline;
+      }
+      .contact-form .button {
+        border: 0;
+        cursor: pointer;
+        justify-self: start;
+      }
+      @media (max-width: 800px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+        }
+        .contact {
+          padding: 64px 0;
+        }
+      }

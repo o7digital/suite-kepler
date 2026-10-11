@@ -176,3 +176,32 @@ test('robots and XML sitemap list every canonical page with reciprocal language 
   }
   await page.close();
 });
+
+for (const [route, lang] of [['/', 'es'], ['/en/', 'en']]) {
+  test(`${route}: contact validates required fields and posts to Formspree`, async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
+    // Intercept the submission so this check never sends a real message.
+    await page.route('https://formspree.io/f/xzedvjyj', r => r.fulfill({
+      contentType: 'text/html', body: '<p>Submission received by test</p>',
+    }));
+    await page.goto(base + route);
+    const form = page.locator('.contact-form');
+    assert.equal(await form.evaluate(node => node.checkValidity()), false);
+    await page.locator('#contact-name').fill('Test Guest');
+    await page.locator('#contact-email').fill('guest@example.com');
+    await page.locator('#contact-message').fill('Question about a stay');
+    assert.equal(await form.evaluate(node => node.checkValidity()), true);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth), false);
+    const requestPromise = page.waitForRequest('https://formspree.io/f/xzedvjyj');
+    await form.locator('button[type="submit"]').click();
+    const request = await requestPromise;
+    assert.equal(request.method(), 'POST');
+    const payload = new URLSearchParams(request.postData());
+    assert.equal(payload.get('language'), lang);
+    assert.equal(payload.get('name'), 'Test Guest');
+    assert.equal(payload.get('email'), 'guest@example.com');
+    assert.equal(payload.get('message'), 'Question about a stay');
+    await page.close();
+  });
+}

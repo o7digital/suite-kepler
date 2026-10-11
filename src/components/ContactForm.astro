@@ -1,0 +1,33 @@
+---
+import { hotel, privacyPaths, type Language } from '../data/hotel';
+interface Props { lang: Language; }
+const { lang } = Astro.props;
+const es = lang === 'es';
+---
+<section class="contact" id="contacto" aria-labelledby="contact-title">
+  <div class="container contact-grid">
+    <div>
+      <p class="section-label">05 / {es ? 'Contacto' : 'Contact'}</p>
+      <h2 class="display" id="contact-title">{es ? 'Hablemos de tu estancia.' : 'Let’s plan your stay.'}</h2>
+      <p>{es ? 'Envíanos tus preguntas y nuestro equipo se pondrá en contacto contigo.' : 'Send us your questions and our team will get in touch.'}</p>
+      <a class="arrow-link" href={`mailto:${hotel.email}`}>{hotel.email}</a>
+    </div>
+    <form class="contact-form" action="https://formspree.io/f/xzedvjyj" method="POST">
+      <input type="hidden" name="language" value={lang} />
+      <label for="contact-name">{es ? 'Nombre' : 'Name'}
+        <input id="contact-name" name="name" autocomplete="name" required maxlength="150" />
+      </label>
+      <label for="contact-email">{es ? 'Correo electrónico' : 'Email'}
+        <input id="contact-email" type="email" name="email" autocomplete="email" required maxlength="254" />
+      </label>
+      <label for="contact-phone">{es ? 'Teléfono (opcional)' : 'Phone (optional)'}
+        <input id="contact-phone" type="tel" name="phone" autocomplete="tel" maxlength="50" />
+      </label>
+      <label for="contact-message">{es ? 'Mensaje' : 'Message'}
+        <textarea id="contact-message" name="message" rows="5" required maxlength="5000"></textarea>
+      </label>
+      <p class="contact-privacy">{es ? 'Consulta nuestro' : 'Read our'} <a href={privacyPaths[lang]}>{es ? 'aviso de privacidad' : 'privacy notice'}</a>.</p>
+      <button class="button" type="submit">{es ? 'Enviar mensaje' : 'Send message'} <span aria-hidden="true">↗</span></button>
+    </form>
+  </div>
+</section>
