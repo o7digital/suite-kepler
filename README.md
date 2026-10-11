@@ -1,22 +1,41 @@
 # Business Suites Kepler
 
-Site vitrine statique de Business Suites Kepler, avec versions espagnole et anglaise et photos de la propriété.
+Site vitrine statique construit avec Astro, en espagnol et anglais. Toutes les photos publiées sont en WebP. Les réservations passent par le moteur officiel Cloudbeds.
 
-## Aperçu local
+## Développement
 
-Depuis la racine du dépôt :
+Utiliser Node.js 24 et travailler sur la branche `dev`.
 
 ```sh
-python3 -m http.server 8080
+npm ci
+npm run dev
 ```
 
-Ouvrir ensuite [http://localhost:8080/](http://localhost:8080/).
+Ouvrir http://localhost:4321/.
 
-Le site ne nécessite ni installation de dépendances ni étape de compilation. Les boutons de réservation redirigent vers le moteur officiel Cloudbeds, qui reste la seule source des tarifs et disponibilités.
+## Structure
 
-## Langues
+- `src/pages/` : accueil ES `/`, accueil EN `/en/` et avis de confidentialité dans les deux langues.
+- `src/layouts/SiteLayout.astro` : document commun, styles, Google Analytics et script de navigation.
+- `src/components/` : tag GA4 `G-BQ28GN72RB` et comportement du menu/sélecteur de langue.
+- `src/styles/` : styles d'origine, conservés pour préserver le design.
+- `public/assets/` : photos WebP, avec deux tailles pour l'image d'accueil.
 
-- Espagnol : `/` (`index.html`).
-- Anglais : `/en/` (`en/index.html`).
+Lors des modifications de contenu, maintenir les versions ES et EN à jour.
 
-Le sélecteur ES / EN conserve la section consultée. Les deux pages partagent les photos du dossier `assets`; les boutons de réservation utilisent la langue correspondante. Lors des modifications, maintenir les deux versions HTML à jour.
+## Validation et déploiement
+
+```sh
+npm run build
+npx playwright install chromium
+npm test
+npm run preview
+```
+
+Les tests utilisent le site compilé dans `dist/` pour vérifier les quatre routes, les images, les métadonnées, GA4 et la navigation mobile/ordinateur.
+
+Le projet est lié à Vercel. `vercel.json` configure explicitement Astro et le répertoire `dist/`.
+
+```sh
+vercel --prod --yes
+```

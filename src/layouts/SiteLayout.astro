@@ -1,0 +1,17 @@
+---
+import Analytics from '../components/Analytics.astro';
+import NavigationScript from '../components/NavigationScript.astro';
+import '../styles/site.css';
+const { lang = 'es' } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <Analytics />
+    <slot name="head" />
+  </head>
+  <body>
+    <slot />
+    <NavigationScript />
+  </body>
+</html>
