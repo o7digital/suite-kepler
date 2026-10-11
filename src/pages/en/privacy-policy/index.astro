@@ -1,81 +1,18 @@
 ---
 import SiteLayout from '../../../layouts/SiteLayout.astro';
+import SeoHead from '../../../components/SeoHead.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import { privacyPaths } from '../../../data/hotel';
 import '../../../styles/privacy.css';
+const lang = 'en' as const;
+const paths = privacyPaths;
 ---
 <SiteLayout lang="en">
   <Fragment slot="head">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0e305d" />
-    <meta
-      name="description"
-      content="Personal data and privacy at BUSINESS SUITES KEPLER."
-    />
-    <title>Privacy notice — Business Suites Kepler</title>
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='5' fill='%230e305d'/%3E%3Cpath d='M18 12v40M20 33 46 12M26 29l22 23' fill='none' stroke='%23c5a476' stroke-width='4.5' stroke-linecap='square'/%3E%3C/svg%3E"
-    />
-    <link rel="canonical" href="https://www.businesssuiteskepler.com/en/privacy-policy/" />
-    <link rel="alternate" hreflang="es" href="https://www.businesssuiteskepler.com/privacy-policy/" />
-    <link rel="alternate" hreflang="en" href="https://www.businesssuiteskepler.com/en/privacy-policy/" />
-    <link rel="alternate" hreflang="x-default" href="https://www.businesssuiteskepler.com/privacy-policy/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Business Suites Kepler" />
-    <meta property="og:title" content="Privacy notice — Business Suites Kepler" />
-    <meta property="og:url" content="https://www.businesssuiteskepler.com/en/privacy-policy/" />
-    <meta property="og:image" content="https://www.businesssuiteskepler.com/assets/grand-suite-four.webp" />
-    <meta name="twitter:card" content="summary_large_image" />
-  
+    <SeoHead lang={lang} paths={paths} title="Privacy notice — Business Suites Kepler" description="Personal data and privacy at BUSINESS SUITES KEPLER." />
   </Fragment>
-    <a class="skip-link" href="#contenido">Skip to content</a>
-    <div class="announcement">
-      <div class="container">
-        <span>Kepler 147 · Verónica Anzúres · Mexico City</span
-        ><span
-          ><a href="tel:+525536668535"
-            >Reservations&nbsp;+52&nbsp;55&nbsp;3666&nbsp;8535</a
-          ></span
-        >
-      </div>
-    </div>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a
-          href="/en/#inicio"
-          class="brand"
-          aria-label="Business Suites Kepler"
-          ><span class="brand-mark">K</span
-          ><span class="brand-name"
-            ><small>Business Suites</small><b>Kepler</b></span
-          ></a
-        ><button
-          type="button"
-          class="menu-button"
-          aria-controls="menu"
-          aria-expanded="false"
-        >
-          Menu
-        </button>
-        <nav id="menu" class="nav" aria-label="Main navigation">
-          <a href="/en/#concepto">Our concept</a><a href="/en/#suites">Suites</a
-          ><a href="/en/#servicios">Amenities</a><a href="/en/#ubicacion">Location</a
-          ><a
-            class="nav-cta"
-            href="https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Book now (opens in a new tab)"
-            >Book now ↗</a
-          >
-        </nav>
-        <div class="language-switch" aria-label="Language">
-          <a href="/privacy-policy/" lang="es" hreflang="es" aria-label="Español">ES</a>
-          <a href="/en/privacy-policy/" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a>
-        </div>
-      </div>
-    </header>
+    <SiteHeader lang={lang} paths={paths} />
     <main id="contenido" tabindex="-1" class="privacy-page container"><p class="section-label">BUSINESS SUITES KEPLER</p><h1>Privacy notice</h1><p class="privacy-date">Last updated: October 7, 2026</p>
 <section aria-labelledby="privacy-0"><h2 id="privacy-0">Controller and contact</h2><p>BUSINESS SUITES KEPLER is the controller of personal data associated with its accommodation services. Its contact address is Kepler 147, Verónica Anzúres, postal code 11590, Miguel Hidalgo, Mexico City, Mexico. For privacy matters, email <a href="mailto:reservaskepler@gmail.com">reservaskepler@gmail.com</a>.</p></section>
 <section aria-labelledby="privacy-1"><h2 id="privacy-1">Information we may receive</h2><p>When enquiring about or booking a stay, you may provide your name, telephone number, email address, arrival and departure dates, number of guests and accommodation requests. Booking, check-in or invoicing may require identification details, nationality, address, Mexican tax identification (RFC) and payment information, depending on the service purchased. If you provide information about accompanying guests, inform them of this notice and obtain permission to share their details.</p></section>
@@ -89,33 +26,6 @@ import '../../../styles/privacy.css';
 <section aria-labelledby="privacy-9"><h2 id="privacy-9">ARCO rights and withdrawal of consent</h2><p>You may request access, rectification, cancellation or opposition (ARCO), withdraw consent, or limit the use or disclosure of your information by emailing <a href="mailto:reservaskepler@gmail.com">reservaskepler@gmail.com</a> with the subject “Privacy / ARCO”. Include your name, a way to receive a response, your request and the data or booking details needed to locate the information. You will receive instructions for providing documents needed to verify identity or representation. For corrections, explain the change and provide supporting documentation. A response will be sent through your chosen contact method; access may be provided by electronic copy. A decision will be communicated within 20 business days and, where approved, implemented within the following 15 business days, subject to justified extensions permitted by law. Withdrawal has no retroactive effect, and legal obligations may prevent immediate deletion.</p></section>
 <section aria-labelledby="privacy-10"><h2 id="privacy-10">Updates and applicable law</h2><p>This notice is governed by Mexico’s current Federal Law on Protection of Personal Data Held by Private Parties. Changes will be published on this page with an updated date. If a change requires new consent, it will be requested before the relevant processing.</p></section>
 <a class="arrow-link" href="/en/">Back to home <span aria-hidden="true">↗</span></a></main>
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-top">
-          <a
-            href="/en/#inicio"
-            class="brand"
-          aria-label="Business Suites Kepler"
-            ><span class="brand-mark">K</span
-            ><span class="brand-name"
-              ><small>Business Suites</small><b>Kepler</b></span
-            ></a
-          >
-          <div class="footer-links">
-            <a href="/en/privacy-policy/">Privacy notice</a>
-            <a href="tel:+525536668535">+52&nbsp;55&nbsp;3666&nbsp;8535</a
-            ><a href="mailto:reservaskepler@gmail.com"
-              >reservaskepler@gmail.com</a
-            ><a href="/en/#ubicacion">Kepler 147, Mexico City</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <span>© Business Suites Kepler</span
-          ><span
-            >Rates, terms and availability are subject to the booking engine.</span
-          >
-        </div>
-      </div>
-    </footer>
+    <SiteFooter lang={lang} />
   
 </SiteLayout>

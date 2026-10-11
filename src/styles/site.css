@@ -1004,3 +1004,12 @@
           transition: none !important;
         }
       }
+
+/* Keep room details and direct booking accessible from the original room cards. */
+.room-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 28px;
+}
+.featured h3 a:hover, .room-pair h3 a:hover { text-decoration: underline; text-underline-offset: 6px; }

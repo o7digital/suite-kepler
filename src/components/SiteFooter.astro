@@ -1,0 +1,33 @@
+---
+import { homePaths, hotel, privacyPaths, type Language } from '../data/hotel';
+interface Props { lang: Language; home?: boolean; }
+const { lang, home = false } = Astro.props;
+---
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-top">
+          <a
+            href={home ? "#inicio" : `${homePaths[lang]}#inicio`}
+            class="brand"
+          aria-label="Business Suites Kepler"
+            ><span class="brand-mark">K</span
+            ><span class="brand-name"
+              ><small>Business Suites</small><b>Kepler</b></span
+            ></a
+          >
+          <div class="footer-links">
+            <a href={privacyPaths[lang]}>{lang === 'es' ? 'Aviso de privacidad' : 'Privacy notice'}</a>
+            <a href={`tel:${hotel.telephone}`}>+52&nbsp;55&nbsp;3666&nbsp;8535</a
+            ><a href={`mailto:${hotel.email}`}
+              >{hotel.email}</a
+            ><a href={home ? '#ubicacion' : `${homePaths[lang]}#ubicacion`}>Kepler 147, {lang === 'es' ? 'Ciudad de México' : 'Mexico City'}</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© Business Suites Kepler</span
+          ><span
+            >{lang === 'es' ? 'Tarifas, condiciones y disponibilidad sujetas al motor de reservas.' : 'Rates, terms and availability are subject to the booking engine.'}</span
+          >
+        </div>
+      </div>
+    </footer>

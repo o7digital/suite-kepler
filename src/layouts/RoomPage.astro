@@ -1,0 +1,150 @@
+---
+import SiteLayout from './SiteLayout.astro';
+import SeoHead from '../components/SeoHead.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { bookingUrl, commonAmenities, homePaths, mapUrl, type Language } from '../data/hotel';
+import { rooms, roomSchema, type Room } from '../data/rooms';
+import '../styles/room.css';
+interface Props { room: Room; lang: Language; }
+const { room, lang } = Astro.props;
+const content = room[lang];
+const spanish = lang === 'es';
+const related = rooms.filter(other => other.id !== room.id);
+const labels = spanish ? {
+  home: 'Inicio', details: 'Características', amenities: 'Servicios para tu estancia',
+  availability: 'Consultar disponibilidad', bookingAria: 'Consultar disponibilidad (se abre en una pestaña nueva)',
+  photos: 'Fotografías de la Grand Suite', location: 'En Verónica Anzúres, cerca de Polanco.',
+  locationText: 'Business Suites Kepler está en Kepler 147, a dos calles de Liverpool Polanco. Desde aquí puedes organizar tus recorridos por Ciudad de México y volver a descansar en tu habitación o suite.',
+  directions: 'Ver cómo llegar', directionsAria: 'Ver cómo llegar (se abre en una pestaña nueva)',
+  facade: 'Fachada de Business Suites Kepler en Kepler 147, Verónica Anzúres',
+  other: 'Compara nuestros espacios.', otherLabel: 'Más opciones de alojamiento',
+  view: 'Ver detalles', city: 'Ciudad de México', reserve: 'Reserva tu estancia.',
+  note: 'Consulta las tarifas, las condiciones y la disponibilidad de tu alojamiento en el motor oficial de reservas Cloudbeds.',
+} : {
+  home: 'Home', details: 'Room features', amenities: 'Services for your stay',
+  availability: 'Check availability', bookingAria: 'Check availability (opens in a new tab)',
+  photos: 'Grand Suite photographs', location: 'In Verónica Anzúres, near Polanco.',
+  locationText: 'Business Suites Kepler is at Kepler 147, two blocks from Liverpool Polanco. Use it as your base for exploring Mexico City and return to rest in your room or suite.',
+  directions: 'Get directions', directionsAria: 'Get directions (opens in a new tab)',
+  facade: 'Business Suites Kepler facade at Kepler 147, Verónica Anzúres',
+  other: 'Compare our spaces.', otherLabel: 'More accommodation options',
+  view: 'View details', city: 'Mexico City', reserve: 'Book your stay.',
+  note: 'Check rates, terms and accommodation availability in the official Cloudbeds booking engine.',
+};
+---
+<SiteLayout lang={lang}>
+  <Fragment slot="head">
+    <SeoHead lang={lang} paths={room.paths} title={content.title} description={content.description}
+      image={room.image} structuredData={roomSchema(room, lang)} />
+    {room.id === 'grand-suite'
+      ? <link rel="preload" as="image" href={room.image} type="image/webp" fetchpriority="high"
+          imagesrcset="/assets/grand-suite-four-768.webp 768w, /assets/grand-suite-four.webp 1501w"
+          imagesizes="(max-width: 680px) 100vw, 57vw" />
+      : <link rel="preload" as="image" href={room.image} type="image/webp" fetchpriority="high" />}
+  </Fragment>
+  <SiteHeader lang={lang} paths={room.paths} />
+  <main id="contenido" tabindex="-1" class="room-page">
+    <section class="hero" id="inicio">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <nav class="room-breadcrumbs" aria-label={spanish ? 'Ruta de navegación' : 'Breadcrumbs'}>
+            <a href={homePaths[lang]}>{labels.home}</a>
+            <span aria-hidden="true">/</span>
+            <span aria-current="page">{content.name}</span>
+          </nav>
+          <p class="hero-kicker">Business Suites Kepler · Verónica Anzúres</p>
+          <h1>{content.heading}<br /><em>{content.emphasis}</em></h1>
+          <p class="hero-lead">{content.lead}</p>
+          <a class="button" href={bookingUrl(lang)} target="_blank" rel="noopener noreferrer" aria-label={labels.bookingAria}>
+            {labels.availability} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="hero-photo">
+          {room.id === 'grand-suite' ? <picture>
+            <source type="image/webp"
+              srcset="/assets/grand-suite-four-768.webp 768w, /assets/grand-suite-four.webp 1501w"
+              sizes="(max-width: 680px) 100vw, 57vw" />
+            <img src={room.image} alt={content.imageAlt} width={room.width} height={room.height} fetchpriority="high" />
+          </picture> : <img src={room.image} alt={content.imageAlt} width={room.width} height={room.height} fetchpriority="high" />}
+          <span class="hero-vertical">Verónica Anzúres · Polanco</span>
+          <span class="photo-note">{content.name} · Business Suites Kepler</span>
+        </div>
+      </div>
+    </section>
+    <section class="intro" id="caracteristicas">
+      <div class="container intro-grid">
+        <div>
+          <p class="section-label">{labels.details}</p>
+          <h2 class="display">{content.introTitle}</h2>
+          <ul class="room-facts">
+            {content.facts.map(fact => <li>{fact}</li>)}
+          </ul>
+        </div>
+        <div class="intro-right">
+          {content.paragraphs.map(paragraph => <p>{paragraph}</p>)}
+          <h3>{labels.amenities}</h3>
+          <div class="service-list">
+            {commonAmenities[lang].map(amenity => <span>{amenity}</span>)}
+          </div>
+        </div>
+      </div>
+    </section>
+    {room.gallery && <section class="room-gallery" aria-labelledby="room-photos">
+      <div class="container">
+        <p class="section-label" id="room-photos">{labels.photos}</p>
+        <div class="room-gallery-grid">
+          {room.gallery.map((photo, index) => <figure>
+            <img src={photo.image} alt={content.galleryAlts![index]} width={photo.width} height={photo.height} loading="lazy" />
+            <figcaption>{content.galleryAlts![index]}</figcaption>
+          </figure>)}
+        </div>
+      </div>
+    </section>}
+    <section class="location" id="ubicacion">
+      <div class="container location-grid">
+        <div class="location-copy">
+          <p class="section-label">Kepler 147 · {labels.city}</p>
+          <h2 class="display">{labels.location}</h2>
+          <p>{labels.locationText}</p>
+          <div class="location-address">Kepler 147, Verónica Anzúres<br />Miguel Hidalgo, {labels.city} 11590</div>
+          <a class="arrow-link" href={mapUrl} target="_blank" rel="noopener noreferrer" aria-label={labels.directionsAria}>
+            {labels.directions} <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="location-image">
+          <img src="/assets/fachada.webp" alt={labels.facade} width="700" height="490" loading="lazy" />
+          <span>Kepler 147 / CDMX</span>
+        </div>
+      </div>
+    </section>
+    <section class="rooms" id="suites">
+      <div class="container">
+        <p class="section-label">{labels.otherLabel}</p>
+        <h2 class="display">{labels.other}</h2>
+        <div class="room-pair">
+          {related.map(other => <article>
+            <a class="image" href={other.paths[lang]} aria-label={other[lang].name} style="display:block">
+              <img src={other.image} alt={other[lang].imageAlt} width={other.width} height={other.height} loading="lazy" />
+            </a>
+            <div class="content">
+              <span class="meta">{other[lang].facts.slice(0, 2).join(' / ')}</span>
+              <h3><a href={other.paths[lang]}>{other[lang].name}</a></h3>
+              <p>{other[lang].lead}</p>
+              <a class="arrow-link" href={other.paths[lang]}>{labels.view} <span aria-hidden="true">↗</span></a>
+            </div>
+          </article>)}
+        </div>
+      </div>
+    </section>
+    <section class="final-cta">
+      <p class="section-label">Business Suites Kepler</p>
+      <h2>{labels.reserve}</h2>
+      <a class="button" href={bookingUrl(lang)} target="_blank" rel="noopener noreferrer" aria-label={labels.bookingAria}>
+        {labels.availability} <span aria-hidden="true">↗</span>
+      </a>
+      <p class="booking-note">{labels.note}</p>
+    </section>
+  </main>
+  <SiteFooter lang={lang} />
+</SiteLayout>

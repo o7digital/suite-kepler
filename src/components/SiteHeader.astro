@@ -1,0 +1,52 @@
+---
+import { bookingUrl, homePaths, hotel, type Language, type LocalizedPaths } from '../data/hotel';
+interface Props { lang: Language; paths: LocalizedPaths; home?: boolean; }
+const { lang, paths, home = false } = Astro.props;
+---
+    <a class="skip-link" href="#contenido">{lang === 'es' ? 'Ir al contenido' : 'Skip to content'}</a>
+    <div class="announcement">
+      <div class="container">
+        <span>Kepler 147 · Verónica Anzúres · {lang === 'es' ? 'Ciudad de México' : 'Mexico City'}</span
+        ><span
+          ><a href={`tel:${hotel.telephone}`}
+            >{lang === 'es' ? 'Reservaciones' : 'Reservations'}&nbsp;+52&nbsp;55&nbsp;3666&nbsp;8535</a
+          ></span
+        >
+      </div>
+    </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a
+          href={home ? "#inicio" : `${homePaths[lang]}#inicio`}
+          class="brand"
+          aria-label="Business Suites Kepler"
+          ><span class="brand-mark">K</span
+          ><span class="brand-name"
+            ><small>Business Suites</small><b>Kepler</b></span
+          ></a
+        ><button
+          type="button"
+          class="menu-button"
+          aria-controls="menu"
+          aria-expanded="false"
+        >
+          {lang === 'es' ? 'Menú' : 'Menu'}
+        </button>
+        <nav id="menu" class="nav" aria-label={lang === 'es' ? 'Navegación principal' : 'Main navigation'}>
+          <a href={home ? "#concepto" : `${homePaths[lang]}#concepto`}>{lang === 'es' ? 'El concepto' : 'Our concept'}</a><a href={home ? "#suites" : `${homePaths[lang]}#suites`}>{lang === 'es' ? 'Suites' : 'Suites'}</a
+          ><a href={home ? "#servicios" : `${homePaths[lang]}#servicios`}>{lang === 'es' ? 'Servicios' : 'Amenities'}</a><a href={home ? "#ubicacion" : `${homePaths[lang]}#ubicacion`}>{lang === 'es' ? 'Ubicación' : 'Location'}</a
+          ><a
+            class="nav-cta"
+            href={bookingUrl(lang)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={lang === 'es' ? 'Reservar ahora (se abre en una pestaña nueva)' : 'Book now (opens in a new tab)'}
+            >{lang === 'es' ? 'Reservar ahora' : 'Book now'} ↗</a
+          >
+        </nav>
+        <div class="language-switch" aria-label={lang === 'es' ? 'Idioma' : 'Language'}>
+          <a href={paths.es} lang="es" hreflang="es" aria-label="Español" aria-current={lang === 'es' ? 'page' : undefined}>ES</a>
+          <a href={paths.en} lang="en" hreflang="en" aria-label="English" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+        </div>
+      </div>
+    </header>
