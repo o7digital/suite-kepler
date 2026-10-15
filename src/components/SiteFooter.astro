@@ -11,10 +11,7 @@ const { lang, home = false } = Astro.props;
             href={home ? "#inicio" : `${homePaths[lang]}#inicio`}
             class="brand"
           aria-label="Business Suites Kepler"
-            ><span class="brand-mark">K</span
-            ><span class="brand-name"
-              ><small>Business Suites</small><b>Kepler</b></span
-            ></a
+            ><img class="footer-logo" src="/assets/logo-kepler-footer.webp" alt="Business Suites Kepler" width="950" height="660" loading="lazy" decoding="async" /></a
           >
           <div class="footer-links">
             <a href={`${homePaths[lang]}#contacto`}>{lang === 'es' ? 'Contacto' : 'Contact'}</a>

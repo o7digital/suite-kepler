@@ -176,16 +176,11 @@
         gap: 13px;
         flex-shrink: 0;
       }
-      .brand-mark {
-        width: 43px;
-        height: 55px;
-        border: 1px solid var(--bronze);
-        display: grid;
-        place-items: center;
-        color: var(--bronze);
-        font: normal 2rem/1 var(--display);
-        letter-spacing: -0.1em;
-        padding-right: 5px;
+      .brand-logo {
+        display: block;
+        width: 70px;
+        height: auto;
+        mix-blend-mode: multiply;
       }
       .brand-name {
         display: flex;
@@ -715,12 +710,11 @@
         gap: 35px;
         align-items: start;
       }
-      .footer .brand-mark {
-        color: var(--bronzeLight);
-        border-color: var(--bronzeLight);
-      }
-      .footer .brand-name small {
-        color: var(--bronzeLight);
+      .footer-logo {
+        display: block;
+        width: 250px;
+        max-width: 100%;
+        height: auto;
       }
       .footer-links {
         display: flex;
@@ -861,10 +855,8 @@
         .brand-name b {
           font-size: 1.35rem;
         }
-        .brand-mark {
-          width: 37px;
-          height: 48px;
-          font-size: 1.7rem;
+        .brand-logo {
+          width: 40px;
         }
         .hero-grid {
           display: flex;
@@ -1003,6 +995,15 @@
         }
       }
       @media (max-width: 380px) {
+        .header-inner {
+          gap: 8px;
+        }
+        .site-header .brand {
+          gap: 8px;
+        }
+        .menu-button {
+          padding-inline: 12px;
+        }
         .hero h1 {
           font-size: 3.45rem;
         }
