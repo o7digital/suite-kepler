@@ -242,6 +242,7 @@
         border-bottom-color: currentColor;
       }
       .menu-button {
+        white-space: nowrap;
         display: none;
         background: none;
         border: 1px solid var(--navy);
@@ -843,6 +844,7 @@
         }
       }
       @media (max-width: 680px) {
+        .menu-button { padding-inline: 8px; }
         .container {
           width: calc(100% - 40px);
         }
