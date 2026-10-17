@@ -35,6 +35,10 @@ const { lang, home = false } = Astro.props;
           ><span
             >{lang === 'es' ? 'Tarifas, condiciones y disponibilidad sujetas al motor de reservas.' : localize(lang, 'Rates, terms and availability are subject to the booking engine.')}</span
           >
+          <span class="footer-credit">
+            {lang === 'es' ? 'Sitio realizado por' : lang === 'zh' ? '网站制作：' : 'Website by'}
+            <a href={`https://www.o7digital.com/${lang === 'es' ? 'es' : 'en'}/index-digital-agency`}>o7digital</a>
+          </span>
         </div>
       </div>
     </footer>

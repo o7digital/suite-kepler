@@ -750,6 +750,7 @@
       }
       .footer-bottom {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         gap: 15px;
         color: #98aeb8;
@@ -759,6 +760,8 @@
         font-size: 0.68rem;
         letter-spacing: 0.04em;
       }
+      .footer-credit { text-transform: none; }
+      .footer-credit a { text-decoration: underline; text-underline-offset: 3px; }
       @media (max-width: 1150px) {
         .container {
           width: calc(100% - 64px);
