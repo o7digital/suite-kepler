@@ -1,0 +1,296 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import SeoHead from '../../components/SeoHead.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import ContactForm from '../../components/ContactForm.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { homePaths, hotelSchema } from '../../data/hotel';
+import { rooms } from '../../data/rooms';
+const lang = 'zh' as const;
+const paths = homePaths;
+---
+<SiteLayout lang="zh">
+  <Fragment slot="head">
+    <SeoHead lang={lang} paths={paths} title="墨西哥城 Polanco 附近的客房与套房 | Business Suites Kepler" description="墨西哥城 Verónica Anzúres 的客房与带厨房套房，毗邻 Polanco。了解 Grand Suite、King 和 Queen 房型，并在线预订。" structuredData={hotelSchema(lang)} />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/grand-suite-four.webp"
+      imagesrcset="/assets/grand-suite-four-768.webp 768w, /assets/grand-suite-four.webp 1501w"
+      imagesizes="(max-width: 680px) 100vw, 57vw"
+      type="image/webp"
+      fetchpriority="high"
+    />
+  </Fragment>
+    <SiteHeader lang={lang} paths={paths} home />
+    <main id="contenido" tabindex="-1">
+      <section class="hero" id="inicio">
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="hero-kicker">Business Suites Kepler · 墨西哥城</p>
+            <h1>舒适套房<br />毗邻 <em>Polanco。</em></h1>
+            <p class="hero-lead">
+              位于 Verónica Anzúres 的客房与套房，距离 Liverpool Polanco 两个街区。在墨西哥城，享受公寓的自在与酒店的便利。
+            </p>
+            <a class="arrow-link" href="#suites"
+              >探索我们的套房 <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="hero-photo">
+            <picture>
+              <source
+                type="image/webp"
+                srcset="
+                  /assets/grand-suite-four-768.webp  768w,
+                  /assets/grand-suite-four.webp     1501w
+                "
+                sizes="(max-width: 680px) 100vw, 57vw"
+              />
+              <img
+                src="/assets/grand-suite-four.webp"
+                alt="Business Suites Kepler Grand Suite 套房的客厅和用餐区"
+                width="1501"
+                height="1000"
+                fetchpriority="high"
+              />
+            </picture>
+            <span class="hero-vertical">Verónica Anzúres · Polanco</span
+            ><span class="photo-note">Grand Suite 套房 · Business Suites Kepler</span>
+          </div>
+        </div>
+      </section>
+      <section class="reservation" aria-label="预订咨询">
+        <div class="container reservation-inner">
+          <div class="reservation-text">
+            <span class="reservation-symbol" aria-hidden="true">K.</span>
+            <div>
+              <strong>这座城市，期待您的到来。</strong>
+              <p>实时查询日期、价格及房态。</p>
+            </div>
+          </div>
+          <a
+            class="button"
+            href="https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="查询房态（在新标签页打开）"
+            >查询房态 <span aria-hidden="true">↗</span></a
+          >
+        </div>
+      </section>
+      <section class="intro" id="concepto">
+        <div class="container intro-grid">
+          <div>
+            <p class="section-label">01 / 体验 Business Suites Kepler</p>
+            <h2 class="display">
+              您的旅途，尽在 <em>墨西哥城。</em>
+            </h2>
+          </div>
+          <div class="intro-right">
+            <p>
+              Business Suites Kepler 距离 Liverpool Polanco 两个街区，将公寓的私密自在与酒店服务融为一体，无论商务出行还是休闲度假，都可从这里轻松出发。
+            </p>
+            <p>
+              您可以在温馨的客房短住几日，也可以选择带客厅、用餐区和厨房的 Grand Suite 套房，享受更从容的入住时光。找到适合您的空间。
+            </p>
+            <div class="stat-line">
+              <b>13</b
+              ><span>间客房与套房<br />为您提供理想住宿</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="rooms" id="suites">
+        <div class="container">
+          <div class="rooms-head">
+            <div>
+              <p class="section-label">02 / 我们的房型</p>
+              <h2 class="display">客房与套房<br /><em>位于 Verónica Anzúres。</em></h2>
+            </div>
+            <p>
+              客房配备旅途所需，套房让您愿意多住几日。
+            </p>
+          </div>
+          <article class="featured">
+            <div class="featured-image">
+              <img
+                src="/assets/grand-suite-two.webp"
+                alt="Grand Suite 套房内宽敞的客厅和用餐区"
+                loading="lazy"
+                width="1334"
+                height="1000"
+              /><span>酒店实景照片</span>
+            </div>
+            <div class="featured-copy">
+              <p class="section-label">我们最宽敞的套房</p>
+              <h3><a href={rooms[0].paths[lang]}>Grand<br />Suite 套房。</a></h3>
+              <p>
+                在城市里拥有一处自己的临时住所。设备齐全的厨房、客厅与用餐区，适合共度时光、安静工作，或停留得更久一些。
+              </p>
+              <div class="featured-facts">
+                <span>80–95 平方米</span><span>两张床</span
+                ><span>厨房与客厅</span>
+              </div>
+              <div class="room-actions">
+                <a class="arrow-link" href={rooms[0].paths[lang]}>查看 Grand Suite 套房 <span aria-hidden="true">↗</span></a>
+                <a
+                class="arrow-link"
+                href="https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="查询 Grand Suite 房态（在新标签页打开）"
+                >查询房态 <span aria-hidden="true">↗</span></a
+              >
+              </div>
+            </div>
+          </article>
+          <div class="room-pair">
+            <article>
+              <div class="image">
+                <img
+                  src="/assets/king.webp"
+                  alt="配有床铺和书桌的 King 客房"
+                  loading="lazy"
+                  width="1439"
+                  height="942"
+                />
+              </div>
+              <div class="content">
+                <span class="meta">30 平方米 / King 特大床</span>
+                <h3><a href={rooms[1].paths[lang]}>King 特大床客房</a></h3>
+                <p>
+                  兼顾休息与工作的空间，设有阳台，可使用房外的小厨房。
+                </p>
+                <div class="room-actions">
+                <a class="arrow-link" href={rooms[1].paths[lang]}>查看 King 客房 <span aria-hidden="true">↗</span></a>
+                <a
+                  class="arrow-link"
+                  href="https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="查询 King 客房房态（在新标签页打开）"
+                  >查询房态 <span aria-hidden="true">↗</span></a
+                >
+              </div>
+              </div>
+            </article>
+            <article>
+              <div class="image">
+                <img
+                  src="/assets/queen.webp"
+                  alt="配有床铺和办公区的 Queen 客房"
+                  loading="lazy"
+                  width="1334"
+                  height="1000"
+                />
+              </div>
+              <div class="content">
+                <span class="meta">27 平方米 / Queen 大床</span>
+                <h3><a href={rooms[2].paths[lang]}>Queen 大床客房</a></h3>
+                <p>
+                  安静实用的客房，配有书桌和独立浴室，满足您探索城市的住宿需要。
+                </p>
+                <div class="room-actions">
+                <a class="arrow-link" href={rooms[2].paths[lang]}>查看 Queen 客房 <span aria-hidden="true">↗</span></a>
+                <a
+                  class="arrow-link"
+                  href="https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="查询 Queen 客房房态（在新标签页打开）"
+                  >查询房态 <span aria-hidden="true">↗</span></a
+                >
+              </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section class="experience" id="servicios">
+        <div class="container experience-grid">
+          <div class="experience-images">
+            <img
+              class="primary"
+              src="/assets/grand-suite.webp"
+              alt="Grand Suite 套房内的餐桌"
+              loading="lazy"
+              width="667"
+              height="1000"
+            /><img
+              class="secondary"
+              src="/assets/patio.webp"
+              alt="Grand Suite 套房的私人庭院"
+              loading="lazy"
+              width="750"
+              height="1000"
+            />
+          </div>
+          <div class="experience-copy">
+            <p class="section-label">03 / 为您的入住而设计</p>
+            <h2 class="display">
+              点滴细节， <em>成就美好入住。</em>
+            </h2>
+            <p>
+              忙碌一天之后，这里是您期待回来的地方。自在安顿，享受贴心的入住服务。
+            </p>
+            <div class="service-list">
+              <span>客房无线网络</span><span>每日客房清洁</span
+              ><span>办公空间</span><span>保险箱</span
+              ><span>有限停车位</span
+              ><span>可提供发票</span><span>入住满5晚免费洗衣</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="location" id="ubicacion">
+        <div class="container location-grid">
+          <div class="location-copy">
+            <p class="section-label">04 / 周边环境</p>
+            <h2 class="display">Verónica Anzúres,<br /><em>毗邻 Polanco。</em></h2>
+            <p>
+              酒店位于 Verónica Anzúres，距离 Liverpool Polanco 两个街区，是您探索墨西哥城的便利据点。
+            </p>
+            <p><a class="arrow-link" href="/zh/location/">了解酒店位置与周边 <span aria-hidden="true">↗</span></a></p>
+            <div class="location-address">
+              Kepler 147, Verónica Anzúres<br />Miguel Hidalgo，墨西哥城
+              11590
+            </div>
+            <a
+              class="arrow-link"
+              href="https://www.google.com/maps/search/?api=1&query=Kepler+147%2C+Ver%C3%B3nica+Anz%C3%BAres%2C+Ciudad+de+M%C3%A9xico"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="查看路线（在新标签页打开）"
+              >查看路线 <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="location-image location-map">
+            <iframe
+              src="https://www.google.com/maps?q=Business+Suites+Kepler,+Kepler+147,+Ver%C3%B3nica+Anz%C3%BAres,+Ciudad+de+M%C3%A9xico&amp;z=16&amp;hl=zh-CN&amp;output=embed"
+              title="Google 地图上的 Business Suites Kepler 位置"
+              loading="lazy"
+              width="700"
+              height="490"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+      <ContactForm lang={lang} />
+      <section class="final-cta">
+        <p class="section-label">Business Suites Kepler</p>
+        <h2>您的下一次旅程<br />从这里开始。</h2>
+        <a
+          class="button"
+          href="https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="在线预订（在新标签页打开）"
+          >在线预订 <span aria-hidden="true">↗</span></a
+        >
+      </section>
+    </main>
+    <SiteFooter lang={lang} home />
+  
+</SiteLayout>

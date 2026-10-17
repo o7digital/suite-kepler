@@ -13,6 +13,7 @@ const pairs = [
   ['/habitaciones/king/', '/en/rooms/king/'],
   ['/habitaciones/queen/', '/en/rooms/queen/'],
 ];
+for (const pair of pairs) pair.push(pair[1].replace('/en/', '/zh/'));
 const routes = pairs.flat();
 const domain = 'https://www.businesssuiteskepler.com';
 const titles = new Set(), descriptions = new Set();
@@ -22,7 +23,7 @@ before(async () => {
     const file = join('dist', path.endsWith('/') ? `${path}index.html` : path);
     try {
       const body = await readFile(file);
-      res.setHeader('Content-Type', ({ '.html': 'text/html', '.css': 'text/css', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain' })[extname(file)] || 'application/octet-stream');
+      res.setHeader('Content-Type', ({ '.html': 'text/html', '.css': 'text/css', '.js': 'application/javascript', '.webp': 'image/webp', '.xml': 'application/xml', '.txt': 'text/plain' })[extname(file)] || 'application/octet-stream');
       res.end(body);
     } catch { res.writeHead(404).end(); }
   });
@@ -44,11 +45,13 @@ for (const route of routes) {
     page.on('pageerror', error => errors.push(error.message));
     await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
     assert.equal((await page.goto(base + route)).status(), 200);
-    const lang = route.startsWith('/en/') ? 'en' : 'es';
-    assert.equal(await page.locator('html').getAttribute('lang'), lang);
+    const lang = route.startsWith('/zh/') ? 'zh' : route.startsWith('/en/') ? 'en' : 'es';
+    const languageTag = lang === 'zh' ? 'zh-Hans' : lang;
+    const languageIndex = ['es', 'en', 'zh'].indexOf(lang);
+    assert.equal(await page.locator('html').getAttribute('lang'), languageTag);
     assert.equal(await page.locator('h1').count(), 1);
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'), `https://www.businesssuiteskepler.com${route}`);
-    assert.equal(await page.locator('link[hreflang]').count(), 3);
+    assert.equal(await page.locator('link[hreflang]').count(), 4);
     const title = await page.title();
     const description = await page.locator('meta[name="description"]').getAttribute('content');
     assert.ok(description);
@@ -57,10 +60,10 @@ for (const route of routes) {
     titles.add(title); descriptions.add(description);
     const pair = pairs.find(pair => pair.includes(route));
     const otherRoute = pair[lang === 'es' ? 1 : 0];
-    for (const [language, path] of [['es', pair[0]], ['en', pair[1]], ['x-default', pair[0]]]) {
+    for (const [language, path] of [['es', pair[0]], ['en', pair[1]], ['zh-Hans', pair[2]], ['x-default', pair[0]]]) {
       assert.equal(await page.locator(`link[hreflang="${language}"]`).getAttribute('href'), domain + path);
     }
-    assert.equal(await page.locator('.language-switch a[aria-current="page"]').getAttribute('hreflang'), lang);
+    assert.equal(await page.locator('.language-switch a[aria-current="page"]').getAttribute('hreflang'), languageTag);
     assert.equal(await page.locator(`.language-switch a[hreflang="${lang === 'es' ? 'en' : 'es'}"]`).getAttribute('href'), otherRoute);
     const schemas = await page.locator('script[type="application/ld+json"]').evaluateAll(nodes => nodes.map(node => JSON.parse(node.textContent)));
     if (!route.includes('privacy-policy')) {
@@ -87,18 +90,18 @@ for (const route of routes) {
       } else {
         assert.match(await page.locator('h1').innerText(), /Polanco/);
         for (const paths of pairs.slice(3)) {
-          assert.ok(await page.locator(`main a[href="${paths[lang === 'es' ? 0 : 1]}"]`).count() >= 1);
+          assert.ok(await page.locator(`main a[href="${paths[languageIndex]}"]`).count() >= 1);
         }
       }
     }
-    if (route === '/ubicacion/' || route === '/en/location/') {
+    if (route === '/ubicacion/' || route === '/en/location/' || route === '/zh/location/') {
       const body = await page.locator('main').innerText();
-      for (const landmark of ['Kepler 147', 'Mariano Escobedo 425', 'Marina Nacional 329', 'Chapultepec']) {
+      for (const landmark of ['Kepler 147', 'Mariano Escobedo 425', 'Marina Nacional 329', lang === 'zh' ? '查普尔特佩克' : 'Chapultepec']) {
         assert.ok(body.includes(landmark), `Missing location reference: ${landmark}`);
       }
       assert.doesNotMatch(body, /Ángel de la Independencia|Zona Rosa/);
       for (const roomPair of pairs.slice(3)) {
-        assert.equal(await page.locator(`main a[href="${roomPair[lang === 'es' ? 0 : 1]}"]`).count(), 1);
+        assert.equal(await page.locator(`main a[href="${roomPair[languageIndex]}"]`).count(), 1);
       }
     }
     // Check all initial internal links and their section targets before click handlers mutate them.
@@ -129,7 +132,7 @@ for (const route of routes) {
     const menu = page.locator('.menu-button');
     await menu.click();
     assert.equal(await menu.getAttribute('aria-expanded'), 'true');
-    assert.equal(await menu.textContent(), lang === 'es' ? 'Cerrar' : 'Close');
+    assert.equal(await menu.textContent(), lang === 'zh' ? '关闭' : lang === 'es' ? 'Cerrar' : 'Close');
     await page.keyboard.press('Escape');
     assert.equal(await menu.getAttribute('aria-expanded'), 'false');
     await page.evaluate(() => { window.location.hash = '#suites'; });
@@ -144,7 +147,7 @@ for (const route of routes) {
     }
     assert.equal(await page.locator('.nav').isVisible(), true);
     const booking = await page.locator('a[href*="hotels.cloudbeds.com"]').first().getAttribute('href');
-    assert.ok(booking.includes(`/${lang}/reservation/`));
+    assert.ok(booking.includes(`/${lang === 'zh' ? 'en' : lang}/reservation/`));
     assert.deepEqual(errors, []);
     await page.close();
   });
@@ -172,12 +175,12 @@ test('robots and XML sitemap list every canonical page with reciprocal language 
   assert.deepEqual(entries.map(entry => entry.loc).sort(), routes.map(path => domain + path).sort());
   for (const entry of entries) {
     const pair = pairs.find(pair => pair.some(path => domain + path === entry.loc));
-    assert.deepEqual(entry.alternates, [['es', domain + pair[0]], ['en', domain + pair[1]], ['x-default', domain + pair[0]]]);
+    assert.deepEqual(entry.alternates, [['es', domain + pair[0]], ['en', domain + pair[1]], ['zh-Hans', domain + pair[2]], ['x-default', domain + pair[0]]]);
   }
   await page.close();
 });
 
-for (const [route, lang] of [['/', 'es'], ['/en/', 'en']]) {
+for (const [route, lang] of [['/', 'es'], ['/en/', 'en'], ['/zh/', 'zh']]) {
   test(`${route}: contact validates required fields and posts to Formspree`, async () => {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
@@ -206,7 +209,7 @@ for (const [route, lang] of [['/', 'es'], ['/en/', 'en']]) {
   });
 }
 
-for (const lang of ['es', 'en']) {
+for (const lang of ['es', 'en', 'zh']) {
   test(`Olivia ${lang}: consent, chat, mobile layout and keyboard close`, async () => {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
@@ -215,7 +218,7 @@ for (const lang of ['es', 'en']) {
       payload = route.request().postDataJSON();
       await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ answer: 'Kepler: lavandería gratuita a partir de 5 noches.', conversation: 'signed-conversation' }) });
     });
-    await page.goto(base + (lang === 'es' ? '/' : '/en/'));
+    await page.goto(base + (lang === 'es' ? '/' : `/${lang}/`));
     const widget = page.locator('kepler-olivia');
     await widget.locator('.toggle').click();
     assert.equal(await widget.locator('form input').isDisabled(), true);

@@ -6,7 +6,7 @@ import '../styles/site.css';
 const { lang = 'es' } = Astro.props;
 ---
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={lang === 'zh' ? 'zh-Hans' : lang}>
   <head>
     <Analytics />
     <slot name="head" />

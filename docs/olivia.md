@@ -1,6 +1,6 @@
 # Olivia IA — Business Suites Kepler
 
-The shared site layout loads a bilingual, accessible chat on every page. The
+The shared site layout loads a Spanish, English and Simplified Chinese chat on every page. The
 cream, charcoal and gold panel and layered shadows follow suitesmine-bot's
 Olivia design. Shadow DOM isolates the widget from the site styles. Consent
 is required before sending; chat content is rendered as plain text.
@@ -24,6 +24,6 @@ laundry from five nights. Live rates and availability go to the official
 Cloudbeds engine or reservaskepler@gmail.com / +52 55 3666 8535.
 
 Validation: npm run build, npm run check, npm test; then verify an actual
-production exchange in both languages and a signed conversation follow-up.
+production exchange in all three languages and a signed conversation follow-up.
 Rollback: remove OliviaAI from SiteLayout and redeploy; the dedicated gateway
 can be stopped without affecting other tenants.

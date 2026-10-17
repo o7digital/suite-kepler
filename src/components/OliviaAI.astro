@@ -1,5 +1,7 @@
 ---
-interface Props { lang: 'en' | 'es'; }
+import { localize } from "../data/i18n";
+import { privacyPaths, type Language } from '../data/hotel';
+interface Props { lang: Language; }
 const { lang } = Astro.props;
 const es = lang === 'es';
 ---
@@ -41,26 +43,27 @@ const es = lang === 'es';
     <section class="panel" role="dialog" aria-labelledby="olivia-title" hidden>
       <header>
         <span class="avatar" aria-hidden="true">✧</span>
-        <div><h2 id="olivia-title">{es ? 'Olivia IA' : 'Olivia AI'}</h2><p class="brand">Business Suites Kepler</p><span class="status"><span class="dot" aria-hidden="true"></span>{es ? 'Concierge digital' : 'Digital concierge'}</span></div>
-        <button class="close" aria-label={es ? 'Cerrar el chat' : 'Close chat'} type="button">×</button>
+        <div><h2 id="olivia-title">{es ? 'Olivia IA' : localize(lang, 'Olivia AI')}</h2><p class="brand">Business Suites Kepler</p><span class="status"><span class="dot" aria-hidden="true"></span>{es ? 'Concierge digital' : localize(lang, 'Digital concierge')}</span></div>
+        <button class="close" aria-label={es ? 'Cerrar el chat' : localize(lang, 'Close chat')} type="button">×</button>
       </header>
       <div class="messages" role="log" aria-live="polite" aria-relevant="additions text"></div>
       <div class="actions">
-        <button type="button" data-prompt={es ? '¿Qué diferencia hay entre la Grand Suite, la King y la Queen?' : 'What is the difference between the Grand Suite, King and Queen rooms?'}>{es ? 'Habitaciones' : 'Rooms'}</button>
-        <button type="button" data-prompt={es ? '¿Dónde están ubicados y cómo puedo llegar?' : 'Where are you located and how can I get there?'}>{es ? 'Ubicación' : 'Location'}</button>
-        <button type="button" data-prompt={es ? '¿Qué servicios ofrecen? ¿La lavandería es gratuita?' : 'What services do you offer? Is laundry complimentary?'}>{es ? 'Servicios' : 'Services'}</button>
-        <button type="button" data-prompt={es ? '¿Cómo puedo consultar disponibilidad y tarifas?' : 'How can I check availability and rates?'}>{es ? 'Planear mi estancia' : 'Plan my stay'}</button>
+        <button type="button" data-prompt={es ? '¿Qué diferencia hay entre la Grand Suite, la King y la Queen?' : localize(lang, 'What is the difference between the Grand Suite, King and Queen rooms?')}>{es ? 'Habitaciones' : localize(lang, 'Rooms')}</button>
+        <button type="button" data-prompt={es ? '¿Dónde están ubicados y cómo puedo llegar?' : localize(lang, 'Where are you located and how can I get there?')}>{es ? 'Ubicación' : localize(lang, 'Location')}</button>
+        <button type="button" data-prompt={es ? '¿Qué servicios ofrecen? ¿La lavandería es gratuita?' : localize(lang, 'What services do you offer? Is laundry complimentary?')}>{es ? 'Servicios' : localize(lang, 'Services')}</button>
+        <button type="button" data-prompt={es ? '¿Cómo puedo consultar disponibilidad y tarifas?' : localize(lang, 'How can I check availability and rates?')}>{es ? 'Planear mi estancia' : localize(lang, 'Plan my stay')}</button>
       </div>
-      <div class="consent"><label><input type="checkbox" /><span>{es ? 'He leído y acepto el ' : 'I have read and accept the '}<a href={es ? "/privacy-policy/" : "/en/privacy-policy/"} target="_blank" rel="noopener noreferrer">{es ? 'Aviso de Privacidad' : 'Privacy Notice'}</a>{es ? ' para conversar con Olivia AI. Los mensajes se guardan para atender mi solicitud.' : ' to chat with Olivia AI. Messages are stored to help with my enquiry.'}</span></label></div>
-      <div class="contact"><a href="mailto:reservaskepler@gmail.com">{es ? 'Contactar reservas' : 'Contact reservations'}</a><a href="tel:+525536668535" target="_blank" rel="noopener noreferrer">{es ? 'Llamar ↗' : 'Call ↗'}</a></div>
+      <div class="consent"><label><input type="checkbox" /><span>{es ? 'He leído y acepto el ' : localize(lang, 'I have read and accept the ')}<a href={privacyPaths[lang]} target="_blank" rel="noopener noreferrer">{es ? 'Aviso de Privacidad' : localize(lang, 'Privacy Notice')}</a>{es ? ' para conversar con Olivia AI. Los mensajes se guardan para atender mi solicitud.' : localize(lang, ' to chat with Olivia AI. Messages are stored to help with my enquiry.')}</span></label></div>
+      <div class="contact"><a href="mailto:reservaskepler@gmail.com">{es ? 'Contactar reservas' : localize(lang, 'Contact reservations')}</a><a href="tel:+525536668535" target="_blank" rel="noopener noreferrer">{es ? 'Llamar ↗' : localize(lang, 'Call ↗')}</a></div>
       <p class="error" role="alert" hidden></p>
-      <form><input type="text" aria-label={es ? 'Tu mensaje' : 'Your message'} placeholder={es ? 'Escribe tu pregunta…' : 'Ask your question…'} maxlength="2000" disabled /><button class="send" type="submit" aria-label={es ? 'Enviar' : 'Send'} disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form>
-      <div class="footnote">{es ? 'Disponibilidad y tarifas confirmadas por reservas.' : 'Availability and rates confirmed by reservations.'}</div>
+      <form><input type="text" aria-label={es ? 'Tu mensaje' : localize(lang, 'Your message')} placeholder={es ? 'Escribe tu pregunta…' : localize(lang, 'Ask your question…')} maxlength="2000" disabled /><button class="send" type="submit" aria-label={es ? 'Enviar' : localize(lang, 'Send')} disabled><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></button></form>
+      <div class="footnote">{es ? 'Disponibilidad y tarifas confirmadas por reservas.' : localize(lang, 'Availability and rates confirmed by reservations.')}</div>
     </section>
-    <button class="toggle" type="button" aria-label={es ? 'Abrir Olivia AI' : 'Open Olivia AI'} aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></button>
+    <button class="toggle" type="button" aria-label={es ? 'Abrir Olivia AI' : localize(lang, 'Open Olivia AI')} aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z"/></svg></button>
   </template>
 </kepler-olivia>
 <script>
+  import { localize } from "../data/i18n";
   class KeplerOlivia extends HTMLElement {
     connectedCallback() {
       if (this.shadowRoot) return;
@@ -77,14 +80,15 @@ const es = lang === 'es';
       const error = root.querySelector<HTMLElement>('.error')!;
       const actions = [...root.querySelectorAll<HTMLButtonElement>('[data-prompt]')];
       const sendButton = root.querySelector<HTMLButtonElement>('.send')!;
-      const es = this.lang === 'es';
+      const lang = this.lang;
+      const es = lang === 'es';
       let busy = false;
       let conversation: string | undefined;
       const addMessage = (text: string, user = false) => {
         const p = document.createElement('p'); p.className = user ? 'message user' : 'message'; p.textContent = text;
         messages.append(p); messages.scrollTop = messages.scrollHeight; return p;
       };
-      addMessage(es ? 'Hola, soy Olivia, tu concierge digital. Te ayudo a elegir tu habitación en Business Suites Kepler y a planear tu estancia en Ciudad de México. ¿Qué te gustaría saber?' : 'Hello, I’m Olivia, your digital concierge. I can help you choose your room at Business Suites Kepler and plan your stay in Mexico City. What would you like to know?');
+      addMessage(es ? 'Hola, soy Olivia, tu concierge digital. Te ayudo a elegir tu habitación en Business Suites Kepler y a planear tu estancia en Ciudad de México. ¿Qué te gustaría saber?' : localize(lang, 'Hello, I’m Olivia, your digital concierge. I can help you choose your room at Business Suites Kepler and plan your stay in Mexico City. What would you like to know?'));
       const update = () => { input.disabled = !consent.checked || busy; sendButton.disabled = input.disabled; actions.forEach(button => { button.disabled = input.disabled; }); };
       const close = () => { panel.hidden = true; toggle.setAttribute('aria-expanded', 'false'); toggle.focus(); };
       toggle.addEventListener('click', () => { if (!panel.hidden) return close(); panel.hidden = false; toggle.setAttribute('aria-expanded', 'true'); (consent.checked ? input : consent).focus(); });
@@ -95,17 +99,17 @@ const es = lang === 'es';
         if (!consent.checked || busy || !text.trim()) return;
         text = text.trim(); busy = true; update(); error.hidden = true;
         addMessage(text, true); input.value = '';
-        const pending = addMessage(es ? 'Un momento…' : 'One moment…');
+        const pending = addMessage(es ? 'Un momento…' : localize(lang, 'One moment…'));
         messages.setAttribute('aria-busy', 'true');
         try {
-          const response = await fetch('/api/olivia', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, language: es ? 'es' : 'en', conversation, consent: true }), signal: AbortSignal.timeout(60000) });
+          const response = await fetch('/api/olivia', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, language: lang, conversation, consent: true }), signal: AbortSignal.timeout(60000) });
           if (!response.ok) throw new Error(String(response.status));
           const data = await response.json();
           if (typeof data.answer !== 'string' || typeof data.conversation !== 'string') throw new Error('Invalid response');
           pending.textContent = data.answer; conversation = data.conversation;
         } catch (err) {
           pending.remove(); input.value = text;
-          error.textContent = (err as Error).message === '429' ? (es ? 'Demasiados mensajes. Espera un minuto e inténtalo de nuevo.' : 'Too many messages. Wait a minute and try again.') : (es ? 'Olivia no está disponible ahora. Inténtalo de nuevo o contacta al equipo de reservas.' : 'Olivia is unavailable right now. Try again or contact reservations.');
+          error.textContent = (err as Error).message === '429' ? (es ? 'Demasiados mensajes. Espera un minuto e inténtalo de nuevo.' : localize(lang, 'Too many messages. Wait a minute and try again.')) : (es ? 'Olivia no está disponible ahora. Inténtalo de nuevo o contacta al equipo de reservas.' : localize(lang, 'Olivia is unavailable right now. Try again or contact reservations.'));
           error.hidden = false;
         } finally { busy = false; update(); messages.removeAttribute('aria-busy'); messages.scrollTop = messages.scrollHeight; if (!panel.hidden) input.focus(); }
       };

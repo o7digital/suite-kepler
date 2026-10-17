@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     let body;
     try { body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body; }
     catch { return json(400, { error: 'Invalid JSON' }); }
-    if (!body || typeof body.message !== 'string' || !body.message.trim() || body.message.length > 2000 || !['es', 'en'].includes(body.language) || body.consent !== true || (body.conversation != null && (typeof body.conversation !== 'string' || body.conversation.length > 180))) return json(400, { error: 'Invalid message' });
+    if (!body || typeof body.message !== 'string' || !body.message.trim() || body.message.length > 2000 || !['es', 'en', 'zh'].includes(body.language) || body.consent !== true || (body.conversation != null && (typeof body.conversation !== 'string' || body.conversation.length > 180))) return json(400, { error: 'Invalid message' });
     if (!process.env.OLIVIA_GATEWAY_KEY) return json(503, { error: 'Olivia unavailable' });
     const response = await fetch('https://olivia.o7digitalgroup.com/kepler/chat', {
       method: 'POST',

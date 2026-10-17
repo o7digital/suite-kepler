@@ -1,3 +1,4 @@
+import { chineseRooms } from './rooms.zh';
 import { absoluteUrl, homePaths, hotelSchema, privacyPaths, locationPaths, type Language, type LocalizedPaths } from './hotel';
 
 type RoomContent = {
@@ -26,12 +27,14 @@ export type Room = {
   gallery?: { image: string; width: number; height: number }[];
   es: RoomContent;
   en: RoomContent;
+  zh: RoomContent;
 };
 
 export const rooms: Room[] = [
   {
     id: 'grand-suite',
-    paths: { es: '/habitaciones/grand-suite/', en: '/en/rooms/grand-suite/' },
+    zh: chineseRooms['grand-suite'],
+    paths: { es: '/habitaciones/grand-suite/', en: '/en/rooms/grand-suite/', zh: '/zh/rooms/grand-suite/' },
     image: '/assets/grand-suite-four.webp', width: 1501, height: 1000,
     size: { minValue: 80, maxValue: 95 },
     gallery: [
@@ -77,7 +80,8 @@ export const rooms: Room[] = [
   },
   {
     id: 'king',
-    paths: { es: '/habitaciones/king/', en: '/en/rooms/king/' },
+    zh: chineseRooms['king'],
+    paths: { es: '/habitaciones/king/', en: '/en/rooms/king/', zh: '/zh/rooms/king/' },
     image: '/assets/king.webp', width: 1439, height: 942, size: 30,
     es: {
       name: 'Habitación King',
@@ -116,7 +120,8 @@ export const rooms: Room[] = [
   },
   {
     id: 'queen',
-    paths: { es: '/habitaciones/queen/', en: '/en/rooms/queen/' },
+    zh: chineseRooms['queen'],
+    paths: { es: '/habitaciones/queen/', en: '/en/rooms/queen/', zh: '/zh/rooms/queen/' },
     image: '/assets/queen.webp', width: 1334, height: 1000, size: 27,
     es: {
       name: 'Habitación Queen',

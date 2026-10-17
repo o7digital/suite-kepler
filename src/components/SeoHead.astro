@@ -22,6 +22,7 @@ const favicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' vi
 <link rel="canonical" href={canonical} />
 <link rel="alternate" hreflang="es" href={absoluteUrl(paths.es)} />
 <link rel="alternate" hreflang="en" href={absoluteUrl(paths.en)} />
+<link rel="alternate" hreflang="zh-Hans" href={absoluteUrl(paths.zh)} />
 <link rel="alternate" hreflang="x-default" href={absoluteUrl(paths.es)} />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Business Suites Kepler" />
@@ -29,7 +30,7 @@ const favicon = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' vi
 <meta property="og:description" content={description} />
 <meta property="og:url" content={canonical} />
 <meta property="og:image" content={absoluteUrl(image)} />
-<meta property="og:locale" content={lang === 'es' ? 'es_MX' : 'en_US'} />
-<meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_MX'} />
+<meta property="og:locale" content={lang === 'zh' ? 'zh_CN' : lang === 'es' ? 'es_MX' : 'en_US'} />
+{(['es', 'en', 'zh'] as const).filter(locale => locale !== lang).map(locale => <meta property="og:locale:alternate" content={{ es: 'es_MX', en: 'en_US', zh: 'zh_CN' }[locale]} />)}
 <meta name="twitter:card" content="summary_large_image" />
 {json && <script is:inline type="application/ld+json" set:html={json} />}

@@ -1,4 +1,5 @@
 ---
+import { localize } from "../data/i18n";
 import SiteLayout from './SiteLayout.astro';
 import SeoHead from '../components/SeoHead.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -13,17 +14,17 @@ const sections = es ? [
   { title: 'Viajes de trabajo: Torre Pemex y Marina Nacional.', text: 'Si tu viaje incluye una visita a las oficinas de Pemex, la Torre Ejecutiva está en Marina Nacional 329, colonia Verónica Anzúres. Puedes considerar Business Suites Kepler como alojamiento ejecutivo en la zona y consultar la ruta desde Kepler 147 antes de tu cita. Las habitaciones cuentan con Wi-Fi, espacio para trabajar y facturación disponible.', source: 'https://www.pemex.com/bienes-no-utiles/enajenacion/Paginas/contacto.aspx', label: 'Consultar la dirección oficial de Pemex' },
   { title: 'Visitar Chapultepec y sus museos.', text: 'Además de tu viaje de negocios, puedes planear una visita al Museo Tamayo, en Paseo de la Reforma 51, o al Museo Nacional de Antropología, en el entorno de Reforma y Calzada Gandhi. Ambos forman parte del recorrido cultural de Chapultepec. Revisa los horarios en sus sitios oficiales y consulta la ruta desde el hotel antes de salir.', source: 'https://www.museotamayo.org/visita', label: 'Planear la visita al Museo Tamayo' },
 ] : [
-  { title: 'Suites in Verónica Anzúres, near Polanco.', text: 'Business Suites Kepler is at Kepler 147, in Verónica Anzúres, Miguel Hidalgo, Mexico City. Choose a King Room, a Queen Room or a Grand Suite with an equipped kitchen for your stay near Polanco. The property is in Verónica Anzúres, with Polanco nearby.' },
-  { title: 'Liverpool Polanco and Mariano Escobedo.', text: 'The property is two blocks from Liverpool Polanco, at Calzada General Mariano Escobedo 425. Use this landmark to locate your accommodation near Mariano Escobedo in Mexico City and plan your activities in the area.', source: 'https://assetspwa.liverpool.com.mx/assets/digital/mailings/html/2019/directorio_BX/index.html', label: 'View the Liverpool directory' },
-  { title: 'Business trips: Pemex Tower and Marina Nacional.', text: 'If your trip includes a visit to the Pemex offices, the Executive Tower is at Marina Nacional 329, in Verónica Anzúres. Consider Business Suites Kepler as a base in the neighborhood and check your route from Kepler 147 before your appointment. Rooms offer Wi-Fi, space to work and invoices on request.', source: 'https://www.pemex.com/bienes-no-utiles/enajenacion/Paginas/contacto.aspx', label: 'Check the official Pemex address' },
-  { title: 'Explore Chapultepec and its museums.', text: 'Plan a visit to Museo Tamayo, at Paseo de la Reforma 51, or the National Museum of Anthropology, around Reforma and Calzada Gandhi. Both are part of the Chapultepec cultural area. Check opening hours on their official websites and your route from the hotel before setting out.', source: 'https://www.museotamayo.org/visita', label: 'Plan your Museo Tamayo visit' },
+  { title: localize(lang, 'Suites in Verónica Anzúres, near Polanco.'), text: localize(lang, 'Business Suites Kepler is at Kepler 147, in Verónica Anzúres, Miguel Hidalgo, Mexico City. Choose a King Room, a Queen Room or a Grand Suite with an equipped kitchen for your stay near Polanco. The property is in Verónica Anzúres, with Polanco nearby.') },
+  { title: localize(lang, 'Liverpool Polanco and Mariano Escobedo.'), text: localize(lang, 'The property is two blocks from Liverpool Polanco, at Calzada General Mariano Escobedo 425. Use this landmark to locate your accommodation near Mariano Escobedo in Mexico City and plan your activities in the area.'), source: 'https://assetspwa.liverpool.com.mx/assets/digital/mailings/html/2019/directorio_BX/index.html', label: localize(lang, 'View the Liverpool directory') },
+  { title: localize(lang, 'Business trips: Pemex Tower and Marina Nacional.'), text: localize(lang, 'If your trip includes a visit to the Pemex offices, the Executive Tower is at Marina Nacional 329, in Verónica Anzúres. Consider Business Suites Kepler as a base in the neighborhood and check your route from Kepler 147 before your appointment. Rooms offer Wi-Fi, space to work and invoices on request.'), source: 'https://www.pemex.com/bienes-no-utiles/enajenacion/Paginas/contacto.aspx', label: localize(lang, 'Check the official Pemex address') },
+  { title: localize(lang, 'Explore Chapultepec and its museums.'), text: localize(lang, 'Plan a visit to Museo Tamayo, at Paseo de la Reforma 51, or the National Museum of Anthropology, around Reforma and Calzada Gandhi. Both are part of the Chapultepec cultural area. Check opening hours on their official websites and your route from the hotel before setting out.'), source: 'https://www.museotamayo.org/visita', label: localize(lang, 'Plan your Museo Tamayo visit') },
 ];
 ---
 <SiteLayout lang={lang}>
   <Fragment slot="head">
     <SeoHead lang={lang} paths={locationPaths}
-      title={es ? 'Hotel en Verónica Anzúres, cerca de Polanco | Ubicación Kepler' : 'Hotel in Verónica Anzúres, near Polanco | Kepler location'}
-      description={es ? 'Business Suites Kepler en Kepler 147, Verónica Anzúres, CDMX. Ubica Liverpool Polanco, Mariano Escobedo, Torre Pemex y los museos de Chapultepec.' : 'Find Business Suites Kepler at Kepler 147, Verónica Anzúres, Mexico City. Plan visits to Liverpool Polanco, Pemex Tower and the Chapultepec museums.'}
+      title={es ? 'Hotel en Verónica Anzúres, cerca de Polanco | Ubicación Kepler' : localize(lang, 'Hotel in Verónica Anzúres, near Polanco | Kepler location')}
+      description={es ? 'Business Suites Kepler en Kepler 147, Verónica Anzúres, CDMX. Ubica Liverpool Polanco, Mariano Escobedo, Torre Pemex y los museos de Chapultepec.' : localize(lang, 'Find Business Suites Kepler at Kepler 147, Verónica Anzúres, Mexico City. Plan visits to Liverpool Polanco, Pemex Tower and the Chapultepec museums.')}
       image="/assets/fachada.webp" structuredData={hotelSchema(lang)} />
   </Fragment>
   <SiteHeader lang={lang} paths={locationPaths} />
@@ -32,12 +33,12 @@ const sections = es ? [
       <div class="hero-grid">
         <div class="hero-copy">
           <p class="hero-kicker">Kepler 147 · Miguel Hidalgo · CDMX</p>
-          <h1>{es ? 'En Anzúres,' : 'In Anzúres,'}<br /><em>{es ? 'cerca de Polanco.' : 'near Polanco.'}</em></h1>
-          <p class="hero-lead">{es ? 'Ubica tu estancia en Ciudad de México: nuestra dirección, referencias del barrio y lugares para organizar tu viaje de trabajo o de placer.' : 'Find your base in Mexico City: our address, neighborhood landmarks and places to plan your business or leisure trip.'}</p>
-          <a class="arrow-link" href={mapUrl} target="_blank" rel="noopener noreferrer">{es ? 'Ver cómo llegar' : 'Get directions'} <span aria-hidden="true">↗</span></a>
+          <h1>{es ? 'En Anzúres,' : localize(lang, 'In Anzúres,')}<br /><em>{es ? 'cerca de Polanco.' : localize(lang, 'near Polanco.')}</em></h1>
+          <p class="hero-lead">{es ? 'Ubica tu estancia en Ciudad de México: nuestra dirección, referencias del barrio y lugares para organizar tu viaje de trabajo o de placer.' : localize(lang, 'Find your base in Mexico City: our address, neighborhood landmarks and places to plan your business or leisure trip.')}</p>
+          <a class="arrow-link" href={mapUrl} target="_blank" rel="noopener noreferrer">{es ? 'Ver cómo llegar' : localize(lang, 'Get directions')} <span aria-hidden="true">↗</span></a>
         </div>
         <div class="hero-photo">
-          <img src="/assets/fachada.webp" alt={es ? 'Fachada de Business Suites Kepler en Kepler 147' : 'Business Suites Kepler facade at Kepler 147'} width="700" height="490" fetchpriority="high" />
+          <img src="/assets/fachada.webp" alt={es ? 'Fachada de Business Suites Kepler en Kepler 147' : localize(lang, 'Business Suites Kepler facade at Kepler 147')} width="700" height="490" fetchpriority="high" />
           <span class="photo-note">Kepler 147 · Verónica Anzúres</span>
         </div>
       </div>
@@ -45,31 +46,31 @@ const sections = es ? [
     <section class="intro" id="ubicacion">
       <div class="container intro-grid">
         <div>
-          <p class="section-label">{es ? 'Dirección y alrededores' : 'Address and surroundings'}</p>
+          <p class="section-label">{es ? 'Dirección y alrededores' : localize(lang, 'Address and surroundings')}</p>
           <h2 class="display">Kepler 147.</h2>
-          <p>Verónica Anzúres<br />Miguel Hidalgo, {es ? 'Ciudad de México' : 'Mexico City'} 11590</p>
+          <p>Verónica Anzúres<br />Miguel Hidalgo, {es ? 'Ciudad de México' : localize(lang, 'Mexico City')} 11590</p>
         </div>
         <div class="intro-right">
           {sections.map(section => <section class="area">
             <h2>{section.title}</h2><p>{section.text}</p>
             {section.source && <a href={section.source} target="_blank" rel="noopener noreferrer">{section.label} ↗</a>}
           </section>)}
-          <a href="https://mna.inah.gob.mx/" target="_blank" rel="noopener noreferrer">{es ? 'Sitio oficial del Museo Nacional de Antropología' : 'Official National Museum of Anthropology website'} ↗</a>
+          <a href="https://mna.inah.gob.mx/" target="_blank" rel="noopener noreferrer">{es ? 'Sitio oficial del Museo Nacional de Antropología' : localize(lang, 'Official National Museum of Anthropology website')} ↗</a>
         </div>
       </div>
     </section>
     <section class="rooms" id="suites">
       <div class="container">
-        <p class="section-label">{es ? 'Elige tu alojamiento' : 'Choose your accommodation'}</p>
-        <h2 class="display">{es ? 'Habitaciones y suites en Anzúres.' : 'Rooms and suites in Anzúres.'}</h2>
-        <p class="stay-copy">{es ? 'Para estancias largas cerca de Polanco, la Grand Suite ofrece cocina dentro de la suite, sala y comedor. King cuenta con balcón y acceso a cocineta exterior; Queen ofrece escritorio y baño privado. Consulta disponibilidad y condiciones para tus fechas.' : 'For longer stays near Polanco, the Grand Suite offers an indoor kitchen and living and dining areas. King has a balcony and access to an external kitchenette; Queen offers a desk and private bathroom. Check availability and terms for your dates.'}</p>
+        <p class="section-label">{es ? 'Elige tu alojamiento' : localize(lang, 'Choose your accommodation')}</p>
+        <h2 class="display">{es ? 'Habitaciones y suites en Anzúres.' : localize(lang, 'Rooms and suites in Anzúres.')}</h2>
+        <p class="stay-copy">{es ? 'Para estancias largas cerca de Polanco, la Grand Suite ofrece cocina dentro de la suite, sala y comedor. King cuenta con balcón y acceso a cocineta exterior; Queen ofrece escritorio y baño privado. Consulta disponibilidad y condiciones para tus fechas.' : localize(lang, 'For longer stays near Polanco, the Grand Suite offers an indoor kitchen and living and dining areas. King has a balcony and access to an external kitchenette; Queen offers a desk and private bathroom. Check availability and terms for your dates.')}</p>
         <div class="room-links">{rooms.map(room => <a class="arrow-link" href={room.paths[lang]}>{room[lang].name} ↗</a>)}</div>
       </div>
     </section>
     <section class="final-cta">
       <p class="section-label">Business Suites Kepler</p>
-      <h2>{es ? 'Reserva tu estancia.' : 'Book your stay.'}</h2>
-      <a class="button" href={bookingUrl(lang)} target="_blank" rel="noopener noreferrer">{es ? 'Consultar disponibilidad' : 'Check availability'} ↗</a>
+      <h2>{es ? 'Reserva tu estancia.' : localize(lang, 'Book your stay.')}</h2>
+      <a class="button" href={bookingUrl(lang)} target="_blank" rel="noopener noreferrer">{es ? 'Consultar disponibilidad' : localize(lang, 'Check availability')} ↗</a>
     </section>
   </main>
   <SiteFooter lang={lang} />

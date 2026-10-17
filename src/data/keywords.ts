@@ -1,6 +1,7 @@
 import type { Language } from './hotel';
 
 export const footerKeywords: Record<Language, string[]> = {
+  "zh": ["Polanco 附近的套房", "Verónica Anzúres 酒店", "墨西哥城公寓式酒店", "墨西哥城带厨房的套房", "商务旅行住宿", "Liverpool Polanco 附近酒店", "Pemex 大厦附近住宿", "查普尔特佩克附近酒店", "国家人类学博物馆附近住宿", "Grand Suite 套房", "King 特大床客房", "Queen 大床客房", "Business Suites Kepler 预订"],
   "es": [
     "Suites cerca de Polanco",
     "Hotel en Verónica Anzúres",

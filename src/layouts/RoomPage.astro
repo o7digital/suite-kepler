@@ -1,4 +1,5 @@
 ---
+import { localize } from "../data/i18n";
 import SiteLayout from './SiteLayout.astro';
 import SeoHead from '../components/SeoHead.astro';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -22,15 +23,15 @@ const labels = spanish ? {
   view: 'Ver detalles', city: 'Ciudad de México', reserve: 'Reserva tu estancia.',
   note: 'Consulta las tarifas, las condiciones y la disponibilidad de tu alojamiento en el motor oficial de reservas Cloudbeds.',
 } : {
-  home: 'Home', details: 'Room features', amenities: 'Services for your stay',
-  availability: 'Check availability', bookingAria: 'Check availability (opens in a new tab)',
-  photos: 'Grand Suite photographs', location: 'In Verónica Anzúres, near Polanco.',
-  locationText: 'Business Suites Kepler is at Kepler 147, two blocks from Liverpool Polanco. Use it as your base for exploring Mexico City and return to rest in your room or suite.',
-  directions: 'Get directions', directionsAria: 'Get directions (opens in a new tab)',
-  facade: 'Business Suites Kepler facade at Kepler 147, Verónica Anzúres',
-  other: 'Compare our spaces.', otherLabel: 'More accommodation options',
-  view: 'View details', city: 'Mexico City', reserve: 'Book your stay.',
-  note: 'Check rates, terms and accommodation availability in the official Cloudbeds booking engine.',
+  home: localize(lang, 'Home'), details: localize(lang, 'Room features'), amenities: localize(lang, 'Services for your stay'),
+  availability: localize(lang, 'Check availability'), bookingAria: localize(lang, 'Check availability (opens in a new tab)'),
+  photos: localize(lang, 'Grand Suite photographs'), location: localize(lang, 'In Verónica Anzúres, near Polanco.'),
+  locationText: localize(lang, 'Business Suites Kepler is at Kepler 147, two blocks from Liverpool Polanco. Use it as your base for exploring Mexico City and return to rest in your room or suite.'),
+  directions: localize(lang, 'Get directions'), directionsAria: localize(lang, 'Get directions (opens in a new tab)'),
+  facade: localize(lang, 'Business Suites Kepler facade at Kepler 147, Verónica Anzúres'),
+  other: localize(lang, 'Compare our spaces.'), otherLabel: localize(lang, 'More accommodation options'),
+  view: localize(lang, 'View details'), city: localize(lang, 'Mexico City'), reserve: localize(lang, 'Book your stay.'),
+  note: localize(lang, 'Check rates, terms and accommodation availability in the official Cloudbeds booking engine.'),
 };
 ---
 <SiteLayout lang={lang}>
@@ -48,7 +49,7 @@ const labels = spanish ? {
     <section class="hero" id="inicio">
       <div class="hero-grid">
         <div class="hero-copy">
-          <nav class="room-breadcrumbs" aria-label={spanish ? 'Ruta de navegación' : 'Breadcrumbs'}>
+          <nav class="room-breadcrumbs" aria-label={spanish ? 'Ruta de navegación' : localize(lang, 'Breadcrumbs')}>
             <a href={homePaths[lang]}>{labels.home}</a>
             <span aria-hidden="true">/</span>
             <span aria-current="page">{content.name}</span>
@@ -107,7 +108,7 @@ const labels = spanish ? {
           <p class="section-label">Kepler 147 · {labels.city}</p>
           <h2 class="display">{labels.location}</h2>
           <p>{labels.locationText}</p>
-          <p><a class="arrow-link" href={locationPaths[lang]}>{spanish ? 'Ubicación y alrededores' : 'Location and surroundings'} <span aria-hidden="true">↗</span></a></p>
+          <p><a class="arrow-link" href={locationPaths[lang]}>{spanish ? 'Ubicación y alrededores' : localize(lang, 'Location and surroundings')} <span aria-hidden="true">↗</span></a></p>
           <div class="location-address">Kepler 147, Verónica Anzúres<br />Miguel Hidalgo, {labels.city} 11590</div>
           <a class="arrow-link" href={mapUrl} target="_blank" rel="noopener noreferrer" aria-label={labels.directionsAria}>
             {labels.directions} <span aria-hidden="true">↗</span>

@@ -1,0 +1,33 @@
+---
+import SiteLayout from '../../../layouts/SiteLayout.astro';
+import SeoHead from '../../../components/SeoHead.astro';
+import SiteHeader from '../../../components/SiteHeader.astro';
+import SiteFooter from '../../../components/SiteFooter.astro';
+import { privacyPaths } from '../../../data/hotel';
+import '../../../styles/privacy.css';
+const lang = 'zh' as const;
+const paths = privacyPaths;
+---
+<SiteLayout lang={lang}>
+  <Fragment slot="head">
+    <SeoHead lang={lang} paths={paths} title="隐私声明 — Business Suites Kepler" description="BUSINESS SUITES KEPLER 的个人信息处理与隐私说明。" />
+  </Fragment>
+  <SiteHeader lang={lang} paths={paths} />
+  <main id="contenido" tabindex="-1" class="privacy-page container">
+    <p class="section-label">BUSINESS SUITES KEPLER</p><h1>隐私声明</h1><p class="privacy-date">最后更新：2026年10月16日</p>
+    <section aria-labelledby="privacy-0"><h2 id="privacy-0">信息处理责任方与联系方式</h2><p>BUSINESS SUITES KEPLER 是与其住宿服务有关的个人信息的处理责任方。联系地址为 Kepler 147, colonia Verónica Anzúres, C.P. 11590, Miguel Hidalgo, Ciudad de México, México。隐私事宜请发送邮件至 <a href="mailto:reservaskepler@gmail.com">reservaskepler@gmail.com</a>。</p></section>
+    <section aria-labelledby="privacy-1"><h2 id="privacy-1">我们可能接收的信息</h2><p>咨询或预订住宿时，您可能提供姓名、电话号码、电子邮箱、入住和退房日期、入住人数及住宿需求。根据所购买的服务，预订、入住登记或开票时可能需要身份证明、国籍、地址、墨西哥税号（RFC）及付款信息。如提供同行人员的信息，请向其说明本声明，并获得分享其信息的授权。</p></section>
+    <section aria-labelledby="privacy-2"><h2 id="privacy-2">信息的使用目的</h2><p>我们使用信息来回复咨询、管理预订及变更、安排入住、核实客人身份、提供所需服务、处理付款及发票，以及解答问题或处理争议。仅应要求提供与各项服务有关的信息。与预订有关的必要沟通属于住宿服务的一部分。</p></section>
+    <section aria-labelledby="privacy-3"><h2 id="privacy-3">可选择的营销沟通</h2><p>促销及营销沟通为可选项目，并在适用情况下需要您的授权。您可拒绝接收，或向联系邮箱发送主题为“Unsubscribe”的邮件退订。此选择不影响您的预订或住宿服务。</p></section>
+    <section aria-labelledby="privacy-4"><h2 id="privacy-4">敏感信息</h2><p>一般咨询请勿通过电子邮件发送医疗信息或其他敏感信息。如特定需求需要敏感信息，我们将在处理前说明用途，并取得相应的明确书面同意。</p></section>
+    <section aria-labelledby="privacy-5"><h2 id="privacy-5">Cloudbeds 预订与外部服务</h2><p>预订按钮将打开外部网站上的 Cloudbeds 预订系统。输入信息前，请阅读该网站的声明和条款。参与预订、付款或技术支持的服务商可能按各自职责处理相关事项。地图及其他外部网站也适用其运营方的隐私声明。</p></section>
+    <section aria-labelledby="privacy-chat"><h2 id="privacy-chat">与 Olivia 智能礼宾聊天</h2><p>聊天服务为可选功能，发送消息前会请求您的同意。您的问题及聊天记录将使用人工智能处理，并保存在 Olivia 平台，用于回复有关 Business Suites Kepler 的咨询。为保护服务，请求可能包含 IP 地址等技术信息。请勿分享敏感信息、密码或银行卡资料。Olivia 无法确认预订或实时房态，请使用预订系统或联系酒店。您可通过本声明中的隐私联系邮箱查询您的消息或请求删除。</p></section>
+    <section aria-labelledby="privacy-6"><h2 id="privacy-6">信息共享</h2><p>为提供所需服务，我们可能与代表酒店提供服务的供应商共享信息，或在法律要求时向主管机关提供信息。如向第三方传输信息需要同意，我们将在传输前征求同意。浏览本网站并不构成对可选信息传输的概括授权。</p></section>
+    <section aria-labelledby="privacy-7"><h2 id="privacy-7">浏览与 Cookie</h2><p>本网站使用 Google Analytics 统计访问和页面使用情况，该服务可能使用分析类 Cookie。本信息网站不提供注册表单或广告工具。网站托管服务商可能处理 IP 地址、访问日志等技术请求信息，用于提供及保护网站。Cloudbeds 和其他链接网站可能使用自己的 Cookie，请查看其声明及浏览器设置。</p></section>
+    <section aria-labelledby="privacy-8"><h2 id="privacy-8">信息保存与保护</h2><p>信息将根据住宿服务关系及适用的记录保存义务予以保留。不再需要时，将按适用要求封存或删除。信息处理应限制访问并采取适当的安全措施；我们不会通过联系邮箱索取银行卡资料。</p></section>
+    <section aria-labelledby="privacy-9"><h2 id="privacy-9">ARCO 权利与撤回同意</h2><p>您可向 <a href="mailto:reservaskepler@gmail.com">reservaskepler@gmail.com</a> 发送主题为“Privacy / ARCO”的邮件，请求访问、更正、删除或反对处理个人信息（ARCO），撤回同意，或限制信息使用与披露。请提供姓名、回复方式、具体请求，以及查找信息所需的数据或预订资料。我们将告知核实身份或代理权限所需的文件。申请更正时，请说明变更并提供证明。回复将通过您选择的方式发送；信息访问可通过电子副本提供。我们将在20个工作日内告知决定，获准后在随后15个工作日内执行；法律允许且有正当理由的延期除外。撤回同意不具有追溯效力，法定义务可能使信息无法立即删除。</p></section>
+    <section aria-labelledby="privacy-10"><h2 id="privacy-10">更新与适用法律</h2><p>本声明受墨西哥现行《私人持有个人数据保护联邦法》约束。变更将在本页公布，并更新日期。如变更需要重新征求同意，我们将在相关处理开始前提出请求。</p></section>
+    <a class="arrow-link" href="/zh/">返回首页 <span aria-hidden="true">↗</span></a>
+  </main>
+  <SiteFooter lang={lang} />
+</SiteLayout>

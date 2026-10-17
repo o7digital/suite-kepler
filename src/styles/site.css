@@ -995,6 +995,9 @@
         }
       }
       @media (max-width: 380px) {
+        .site-header .brand-logo { width: 34px; }
+        .language-switch { gap: 3px; }
+        .language-switch a { padding-inline: 2px; }
         .header-inner {
           gap: 8px;
         }
@@ -1002,7 +1005,7 @@
           gap: 8px;
         }
         .menu-button {
-          padding-inline: 12px;
+          padding-inline: 7px;
         }
         .hero h1 {
           font-size: 3.45rem;
@@ -1109,3 +1112,11 @@
           padding: 64px 0;
         }
       }
+
+/* Chinese uses system CJK fonts and spacing suited to full-width characters. */
+html[lang="zh-Hans"] {
+  --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --display: "Songti SC", "SimSun", "Noto Serif CJK SC", serif;
+}
+html[lang="zh-Hans"] :is(h1, h2, h3, .display) { line-height: 1.2; letter-spacing: 0; }
+html[lang="zh-Hans"] :is(.section-label, .nav, .footer-links, .hero-kicker) { letter-spacing: .06em; }

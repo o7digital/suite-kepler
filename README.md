@@ -55,3 +55,7 @@ Les cartes de l’accueil et les pages d’hébergement proposent des liens inte
 `src/pages/sitemap.xml.ts` génère `/sitemap.xml` depuis les mêmes données de routes bilingues que les pages. Chaque URL possède ses alternates ES/EN et `x-default`. `public/robots.txt` déclare ce sitemap. Soumettre `https://www.businesssuiteskepler.com/sitemap.xml` dans Google Search Console après le déploiement.
 
 Les données structurées `Hotel` reprennent l’adresse, le téléphone, l’email, les coordonnées géographiques, les 13 hébergements et les services affichés. Les pages individuelles ajoutent `HotelRoom` et `BreadcrumbList`. Source des coordonnées : [moteur de réservation officiel Cloudbeds](https://hotels.cloudbeds.com/reservation/lSYkcf), vérifié le 10 octobre 2026.
+
+## Chinese version
+
+Simplified Chinese pages live under `/zh/`: home, location, privacy notice and all three room pages. Shared UI strings are in `src/data/i18n.ts`; room translations are in `src/data/rooms.zh.ts`. Every page links to its ES/EN/中文 equivalents, with `zh-Hans` alternates in HTML and sitemap. Chinese booking links open the existing English Cloudbeds flow. Olivia accepts `zh` and replies in Simplified Chinese via the dedicated Kepler VPS gateway.

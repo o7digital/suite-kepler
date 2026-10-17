@@ -1,4 +1,5 @@
 ---
+import { localize } from "../data/i18n";
 import { homePaths, hotel, privacyPaths, locationPaths, type Language } from '../data/hotel';
 import { footerKeywords } from '../data/keywords';
 interface Props { lang: Language; home?: boolean; }
@@ -14,17 +15,17 @@ const { lang, home = false } = Astro.props;
             ><img class="footer-logo" src="/assets/logo-kepler-footer-official.webp" alt="Business Suites Kepler" width="950" height="660" loading="lazy" decoding="async" /></a
           >
           <div class="footer-links">
-            <a href={`${homePaths[lang]}#contacto`}>{lang === 'es' ? 'Contacto' : 'Contact'}</a>
-            <a href={locationPaths[lang]}>{lang === 'es' ? 'Ubicación y alrededores' : 'Location and surroundings'}</a>
-            <a href={privacyPaths[lang]}>{lang === 'es' ? 'Aviso de privacidad' : 'Privacy notice'}</a>
+            <a href={`${homePaths[lang]}#contacto`}>{lang === 'es' ? 'Contacto' : localize(lang, 'Contact')}</a>
+            <a href={locationPaths[lang]}>{lang === 'es' ? 'Ubicación y alrededores' : localize(lang, 'Location and surroundings')}</a>
+            <a href={privacyPaths[lang]}>{lang === 'es' ? 'Aviso de privacidad' : localize(lang, 'Privacy notice')}</a>
             <a href={`tel:${hotel.telephone}`}>+52&nbsp;55&nbsp;3666&nbsp;8535</a
             ><a href={`mailto:${hotel.email}`}
               >{hotel.email}</a
-            ><a href={home ? '#ubicacion' : `${homePaths[lang]}#ubicacion`}>Kepler 147, {lang === 'es' ? 'Ciudad de México' : 'Mexico City'}</a>
+            ><a href={home ? '#ubicacion' : `${homePaths[lang]}#ubicacion`}>Kepler 147, {lang === 'es' ? 'Ciudad de México' : localize(lang, 'Mexico City')}</a>
           </div>
         </div>
-        <section class="footer-keywords" aria-label={lang === 'es' ? 'Alojamiento y alrededores' : 'Accommodation and surroundings'}>
-          <h2>{lang === 'es' ? 'Alojamiento y alrededores' : 'Accommodation and surroundings'}</h2>
+        <section class="footer-keywords" aria-label={lang === 'es' ? 'Alojamiento y alrededores' : localize(lang, 'Accommodation and surroundings')}>
+          <h2>{lang === 'es' ? 'Alojamiento y alrededores' : localize(lang, 'Accommodation and surroundings')}</h2>
           <ul>
             {footerKeywords[lang].map(keyword => <li>{keyword}</li>)}
           </ul>
@@ -32,7 +33,7 @@ const { lang, home = false } = Astro.props;
         <div class="footer-bottom">
           <span>© Business Suites Kepler</span
           ><span
-            >{lang === 'es' ? 'Tarifas, condiciones y disponibilidad sujetas al motor de reservas.' : 'Rates, terms and availability are subject to the booking engine.'}</span
+            >{lang === 'es' ? 'Tarifas, condiciones y disponibilidad sujetas al motor de reservas.' : localize(lang, 'Rates, terms and availability are subject to the booking engine.')}</span
           >
         </div>
       </div>
