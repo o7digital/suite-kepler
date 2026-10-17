@@ -1,4 +1,5 @@
 ---
+import OliviaAI from '../components/OliviaAI.astro';
 import Analytics from '../components/Analytics.astro';
 import NavigationScript from '../components/NavigationScript.astro';
 import '../styles/site.css';
@@ -13,5 +14,6 @@ const { lang = 'es' } = Astro.props;
   <body>
     <slot />
     <NavigationScript />
+    <OliviaAI lang={lang} />
   </body>
 </html>

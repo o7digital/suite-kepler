@@ -205,3 +205,33 @@ for (const [route, lang] of [['/', 'es'], ['/en/', 'en']]) {
     await page.close();
   });
 }
+
+for (const lang of ['es', 'en']) {
+  test(`Olivia ${lang}: consent, chat, mobile layout and keyboard close`, async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
+    let payload;
+    await page.route('**/api/olivia', async route => {
+      payload = route.request().postDataJSON();
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ answer: 'Kepler: lavandería gratuita a partir de 5 noches.', conversation: 'signed-conversation' }) });
+    });
+    await page.goto(base + (lang === 'es' ? '/' : '/en/'));
+    const widget = page.locator('kepler-olivia');
+    await widget.locator('.toggle').click();
+    assert.equal(await widget.locator('form input').isDisabled(), true);
+    await widget.locator('.consent input').check();
+    await widget.locator('form input').fill('¿La lavandería es gratuita?');
+    await widget.locator('form').evaluate(form => form.requestSubmit());
+    await widget.locator('.message:not(.user)').filter({ hasText: 'Kepler: lavandería' }).waitFor();
+    assert.equal(payload.language, lang);
+    assert.equal(payload.consent, true);
+    const rect = await widget.locator('.panel').boundingBox();
+    assert.ok(rect.x >= 0 && rect.x + rect.width <= 390 && rect.y >= 0);
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    assert.equal(await widget.locator('.panel').evaluate(el => getComputedStyle(el).boxShadow !== 'none'), true);
+    await widget.locator('form input').press('Escape');
+    assert.equal(await widget.locator('.panel').isHidden(), true);
+    assert.equal(await widget.locator('.toggle').getAttribute('aria-expanded'), 'false');
+    await page.close();
+  });
+}
