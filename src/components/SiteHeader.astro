@@ -35,7 +35,7 @@ const { lang, paths, home = false } = Astro.props;
         </button>
         <nav id="menu" class="nav" aria-label={lang === 'es' ? 'Navegación principal' : localize(lang, 'Main navigation')}>
           <a href={home ? "#concepto" : `${homePaths[lang]}#concepto`}>{lang === 'es' ? 'El concepto' : localize(lang, 'Our concept')}</a><a href={home ? "#suites" : `${homePaths[lang]}#suites`}>{localize(lang, 'Suites')}</a
-          ><a href={home ? "#servicios" : `${homePaths[lang]}#servicios`}>{lang === 'es' ? 'Servicios' : localize(lang, 'Amenities')}</a><a href={home ? "#ubicacion" : `${homePaths[lang]}#ubicacion`}>{lang === 'es' ? 'Ubicación' : localize(lang, 'Location')}</a
+          ><a href={home ? "#servicios" : `${homePaths[lang]}#servicios`}>{lang === 'es' ? 'Servicios' : localize(lang, 'Amenities')}</a><a href={home ? "#eventos" : `${homePaths[lang]}#eventos`}>{lang === 'es' ? 'Eventos' : lang === 'zh' ? '活动' : 'Events'}</a><a href={home ? "#ubicacion" : `${homePaths[lang]}#ubicacion`}>{lang === 'es' ? 'Ubicación' : localize(lang, 'Location')}</a
           ><a
             class="nav-cta"
             href={bookingUrl(lang)}

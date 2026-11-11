@@ -4,6 +4,7 @@ import SeoHead from '../../components/SeoHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import EventsAgenda from '../../components/EventsAgenda.astro';
 import { homePaths, hotelSchema } from '../../data/hotel';
 import { rooms } from '../../data/rooms';
 const lang = 'zh' as const;
@@ -242,10 +243,11 @@ const paths = homePaths;
           </div>
         </div>
       </section>
+      <EventsAgenda lang={lang} />
       <section class="location" id="ubicacion">
         <div class="container location-grid">
           <div class="location-copy">
-            <p class="section-label">04 / 周边环境</p>
+            <p class="section-label">05 / 周边环境</p>
             <h2 class="display">Verónica Anzúres,<br /><em>毗邻 Polanco。</em></h2>
             <p>
               酒店位于 Verónica Anzúres，距离 Liverpool Polanco 两个街区，是您探索墨西哥城的便利据点。

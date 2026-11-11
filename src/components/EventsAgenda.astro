@@ -1,0 +1,35 @@
+---
+import type { Language } from '../data/hotel';
+import { bookingUrl } from '../data/hotel';
+import data from '../data/events.json';
+import { mexicoMonth, renderAgenda } from '../lib/events-calendar';
+import '../styles/events.css';
+
+interface Props { lang: Language; }
+const { lang } = Astro.props;
+const month = mexicoMonth();
+---
+<section id="eventos" class="events" aria-labelledby="events-title" data-events-calendar data-month={month} data-language={lang} data-booking-url={bookingUrl(lang)}>
+  <Fragment set:html={renderAgenda(data, month, lang, bookingUrl(lang))} />
+</section>
+
+<script>
+  import data from '../data/events.json';
+  import { mexicoMonth, renderAgenda } from '../lib/events-calendar';
+
+  const root = document.querySelector<HTMLElement>('[data-events-calendar]');
+  if (root) {
+    const lang = root.dataset.language === 'en' || root.dataset.language === 'zh' ? root.dataset.language : 'es';
+    const booking = root.dataset.bookingUrl || '';
+    const refreshMonth = () => {
+      const month = mexicoMonth();
+      if (root.dataset.month === month) return;
+      root.innerHTML = renderAgenda(data, month, lang, booking);
+      root.dataset.month = month;
+    };
+    refreshMonth();
+    window.setInterval(refreshMonth, 60000);
+    window.addEventListener('pageshow', refreshMonth);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshMonth(); });
+  }
+</script>

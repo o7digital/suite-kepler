@@ -3,7 +3,7 @@ import { after, before, test } from 'node:test';
 import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
-import { chromium } from '@playwright/test';
+import { firefox } from '@playwright/test';
 
 let server, browser, base;
 const pairs = [
@@ -29,7 +29,7 @@ before(async () => {
   });
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   base = `http://127.0.0.1:${server.address().port}`;
-  browser = await chromium.launch();
+  browser = await firefox.launch({ executablePath: process.env.PLAYWRIGHT_FIREFOX_EXECUTABLE_PATH });
 });
 after(async () => {
   await browser?.close();
@@ -181,6 +181,43 @@ test('robots and XML sitemap list every canonical page with reciprocal language 
 });
 
 for (const [route, lang] of [['/', 'es'], ['/en/', 'en'], ['/zh/', 'zh']]) {
+  test(`${route}: November agenda and navigation follow the services-to-location order`, async () => {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.clock.install({ time: new Date('2026-11-11T18:00:00Z') });
+    await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
+    await page.goto(base + route);
+    const agenda = page.locator('#eventos');
+    assert.equal(await agenda.getAttribute('data-month'), '2026-11');
+    assert.equal(await agenda.locator('article').count(), 12);
+    const nav = await page.locator('.nav > a').evaluateAll(links => links.map(link => link.getAttribute('href')));
+    assert.deepEqual(nav.slice(nav.indexOf('#servicios'), nav.indexOf('#ubicacion') + 1), ['#servicios', '#eventos', '#ubicacion']);
+    assert.equal(await page.locator('.nav a[href="#eventos"]').textContent(), lang === 'es' ? 'Eventos' : lang === 'en' ? 'Events' : '活动');
+    const sections = await page.locator('main > section').evaluateAll(nodes => nodes.map(node => node.id));
+    assert.equal(sections.indexOf('eventos'), sections.indexOf('servicios') + 1);
+    assert.equal(sections.indexOf('ubicacion'), sections.indexOf('eventos') + 1);
+    const body = await agenda.innerText();
+    assert.match(body, /Karol G/);
+    assert.match(body, /Los Auténticos Caligaris/);
+    assert.doesNotMatch(body, /Suites Mine|Reforma|Bruno Mars|Maroon 5|The Warning/);
+    const dates = await agenda.locator('article').evaluateAll(nodes => nodes.map(node => `${node.dataset.startDate} ${node.dataset.startTime}`));
+    assert.deepEqual(dates, [...dates].sort());
+    for (const width of [320, 390, 768, 1101, 1200, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false, `${lang} ${width}px overflow`);
+    }
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.locator('.menu-button').click();
+    await page.locator('.nav a[href="#eventos"]').click();
+    assert.equal(new URL(page.url()).hash, '#eventos');
+    assert.equal(await page.locator('.menu-button').getAttribute('aria-expanded'), 'false');
+    const target = lang === 'es' ? 'en' : 'es';
+    const switcher = page.locator(`.language-switch a[hreflang="${target}"]`);
+    await switcher.evaluate(link => link.addEventListener('click', event => event.preventDefault()));
+    await switcher.click();
+    assert.match(await switcher.getAttribute('href'), /#eventos$/);
+    await page.close();
+  });
+
   test(`${route}: contact validates required fields and posts to Formspree`, async () => {
     const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
     await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
@@ -205,6 +242,24 @@ for (const [route, lang] of [['/', 'es'], ['/en/', 'en'], ['/zh/', 'zh']]) {
     assert.equal(payload.get('name'), 'Test Guest');
     assert.equal(payload.get('email'), 'guest@example.com');
     assert.equal(payload.get('message'), 'Question about a stay');
+    await page.close();
+  });
+}
+
+for (const [date, month, count] of [
+  ['2026-12-01T06:00:01Z', '2026-12', 9],
+  ['2027-01-01T06:00:01Z', '2027-01', 7],
+  ['2027-02-01T06:00:01Z', '2027-02', 9],
+  ['2027-03-01T06:00:01Z', '2027-03', 0],
+]) {
+  test(`agenda switches to ${month} without showing the previous month`, async () => {
+    const page = await browser.newPage();
+    await page.clock.install({ time: new Date(date) });
+    await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
+    await page.goto(base + '/en/');
+    await page.waitForFunction(month => document.querySelector('#eventos')?.dataset.month === month, month);
+    assert.equal(await page.locator('#eventos article').count(), count);
+    assert.equal(await page.locator('#eventos article[data-event-id$="noviembre"]').count(), 0);
     await page.close();
   });
 }

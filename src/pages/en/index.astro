@@ -4,6 +4,7 @@ import SeoHead from '../../components/SeoHead.astro';
 import SiteHeader from '../../components/SiteHeader.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import SiteFooter from '../../components/SiteFooter.astro';
+import EventsAgenda from '../../components/EventsAgenda.astro';
 import { homePaths, hotelSchema } from '../../data/hotel';
 import { rooms } from '../../data/rooms';
 const lang = 'en' as const;
@@ -242,10 +243,11 @@ const paths = homePaths;
           </div>
         </div>
       </section>
+      <EventsAgenda lang={lang} />
       <section class="location" id="ubicacion">
         <div class="container location-grid">
           <div class="location-copy">
-            <p class="section-label">04 / The neighborhood</p>
+            <p class="section-label">05 / The neighborhood</p>
             <h2 class="display">Verónica Anzúres,<br /><em>near Polanco.</em></h2>
             <p>
               In Verónica Anzúres, two blocks from Liverpool Polanco, you will have a convenient base for exploring Mexico City.

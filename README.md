@@ -29,7 +29,7 @@ Lors des modifications de contenu, maintenir les versions ES et EN à jour.
 ```sh
 npm run check
 npm run build
-npx playwright install chromium
+npx playwright install firefox
 npm test
 npm run preview
 ```
@@ -59,3 +59,11 @@ Les données structurées `Hotel` reprennent l’adresse, le téléphone, l’em
 ## Chinese version
 
 Simplified Chinese pages live under `/zh/`: home, location, privacy notice and all three room pages. Shared UI strings are in `src/data/i18n.ts`; room translations are in `src/data/rooms.zh.ts`. Every page links to its ES/EN/中文 equivalents, with `zh-Hans` alternates in HTML and sitemap. Chinese booking links open the existing English Cloudbeds flow. Olivia accepts `zh` and replies in Simplified Chinese via the dedicated Kepler VPS gateway.
+
+## Agenda mensuel
+
+La section `#eventos` figure entre les services et l’emplacement sur les trois accueils. Les événements approuvés de novembre 2026 à février 2027 sont dans `src/data/events.json`, avec leurs textes ES/EN/中文, sources officielles et images WebP locales sous `public/assets/events/`.
+
+`EventsAgenda.astro` affiche le mois courant au build, puis actualise le mois dans le navigateur à l’heure de Mexico (`America/Mexico_City`), y compris lorsqu’un onglet reste ouvert. Les mois suivants ne sont pas affichés en avance. Un mois sans programme affiche un message d’attente. Pour préparer un autre mois, ajouter sa clé `AAAA-MM` dans les données, les traductions et les visuels, puis reconstruire et déployer.
+
+Les tests Firefox couvrent aussi l’ordre du menu, les ancres des trois langues, la chronologie, les formats mobiles et le changement de mois. `PLAYWRIGHT_FIREFOX_EXECUTABLE_PATH` permet d’utiliser un Firefox Playwright déjà installé.
