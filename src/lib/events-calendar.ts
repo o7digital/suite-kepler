@@ -76,7 +76,7 @@ export function renderAgenda(data: CalendarData, month: string, language: Langua
       <div><p class="events__description">${copy.description}</p><a class="button" href="${publicUrl(booking)}" target="_blank" rel="noopener noreferrer">${copy.book} <span aria-hidden="true">↗</span></a></div></div>
       <p class="events__note">${copy.order} · ${copy.timezone}</p></header>
     ${events.length ? `<div class="events__grid">${events.map(event => `<article class="events__card" data-event-id="${escapeHtml(event.id)}" data-start-date="${escapeHtml(event.sortDate)}" data-start-time="${escapeHtml(event.sortTime || '')}">
-      <div class="events__image"><img src="${publicUrl(event.imageUrl)}" alt="${local(event.title)}" width="${event.imageWidth}" height="${event.imageHeight}" loading="lazy" decoding="async" /></div>
+      ${publicUrl(event.imageUrl) ? `<div class="events__image"><img src="${publicUrl(event.imageUrl)}" alt="${local(event.title)}" width="${event.imageWidth}" height="${event.imageHeight}" loading="lazy" decoding="async" /></div>` : ''}
       <div class="events__body"><p class="events__category">${local(event.category)}</p><h3>${local(event.title)}</h3>
       <p class="events__date">${local(event.date)}</p><p class="events__venue">${local(event.venue)}</p>
       <p class="events__summary">${local(event.description)}</p><a class="events__source" href="${publicUrl(event.url)}" target="_blank" rel="noopener noreferrer">${copy.source} <span aria-hidden="true">↗</span></a></div></article>`).join('')}</div>` : `<p class="events__empty">${copy.empty}</p>`}

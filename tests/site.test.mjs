@@ -17,9 +17,13 @@ for (const pair of pairs) pair.push(pair[1].replace('/en/', '/zh/'));
 const routes = pairs.flat();
 const domain = 'https://www.businesssuiteskepler.com';
 const titles = new Set(), descriptions = new Set();
+const calendar = JSON.parse(await readFile('src/data/events.json', 'utf8'));
+function feed(month) { return { monthKey: month, available: !!calendar.months[month], events: calendar.months[month] || [] }; }
+
 before(async () => {
   server = createServer(async (req, res) => {
     const path = new URL(req.url, 'http://localhost').pathname;
+    if (path === '/api/events-calendar') { res.setHeader('Content-Type', 'application/json'); return res.end(JSON.stringify(feed('2026-11'))); }
     const file = join('dist', path.endsWith('/') ? `${path}index.html` : path);
     try {
       const body = await readFile(file);
@@ -255,6 +259,7 @@ for (const [date, month, count] of [
   test(`agenda switches to ${month} without showing the previous month`, async () => {
     const page = await browser.newPage();
     await page.clock.install({ time: new Date(date) });
+    await page.route('**/api/events-calendar', r => r.fulfill({ json: feed(month) }));
     await page.route('https://www.googletagmanager.com/**', r => r.fulfill({ body: '' }));
     await page.goto(base + '/en/');
     await page.waitForFunction(month => document.querySelector('#eventos')?.dataset.month === month, month);
@@ -293,3 +298,24 @@ for (const lang of ['es', 'en', 'zh']) {
     await page.close();
   });
 }
+
+test('a new CRM month absent from the static build appears in all three languages', async () => {
+  for (const lang of ['es', 'en', 'zh']) {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.clock.install({ time: new Date('2027-03-01T06:00:01Z') });
+    const event = structuredClone(calendar.months['2026-11'][0]);
+    event.id = 'live-march'; event.sortDate = '2027-03-12';
+    event.title = { es: 'Nuevo evento validado', en: 'New approved event', zh: '已审核的新活动' };
+    let approved = true;
+    await page.route('**/api/events-calendar', r => r.fulfill({ json: { monthKey: '2027-03', available: approved, events: approved ? [event] : [] } }));
+    await page.goto(base + (lang === 'es' ? '/' : `/${lang}/`));
+    await page.locator('[data-event-id="live-march"]').waitFor();
+    assert.equal(await page.locator('#eventos article h3').textContent(), event.title[lang]);
+    assert.equal(await page.locator('#eventos article').count(), 1);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+    approved = false;
+    await page.clock.fastForward(60001);
+    await page.waitForFunction(() => document.querySelectorAll('#eventos article').length === 0);
+    await page.close();
+  }
+});

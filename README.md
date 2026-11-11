@@ -64,6 +64,8 @@ Simplified Chinese pages live under `/zh/`: home, location, privacy notice and a
 
 La section `#eventos` figure entre les services et l’emplacement sur les trois accueils. Les événements approuvés de novembre 2026 à février 2027 sont dans `src/data/events.json`, avec leurs textes ES/EN/中文, sources officielles et images WebP locales sous `public/assets/events/`.
 
-`EventsAgenda.astro` affiche le mois courant au build, puis actualise le mois dans le navigateur à l’heure de Mexico (`America/Mexico_City`), y compris lorsqu’un onglet reste ouvert. Les mois suivants ne sont pas affichés en avance. Un mois sans programme affiche un message d’attente. Pour préparer un autre mois, ajouter sa clé `AAAA-MM` dans les données, les traductions et les visuels, puis reconstruire et déployer.
+`EventsAgenda.astro` conserve une version statique de secours et charge l’agenda validé du CRM depuis `/api/events-calendar`. Le flux est propre à Kepler, sans identifiants privés, et sélectionne le mois sur le serveur à l’heure de Mexico (`America/Mexico_City`). Il est relu au chargement, toutes les minutes et au retour dans l’onglet. Les visuels du flux sont servis en WebP.
+
+Pour préparer un nouveau mois, ouvrir le CRM `/admin/mail`, créer le mois, choisir **Business Suites Kepler**, compléter les textes ES/EN/中文 puis **Valider et programmer ce mois**. Le site affichera ce mois à minuit le premier jour, sans modification du dépôt ni redéploiement. Un brouillon reste privé ; un mois sans programme validé affiche un message d’attente. Les modifications d’un programme déjà validé restent privées jusqu’à leur validation suivante. En cas de panne temporaire, seule la version encore courante est conservée.
 
 Les tests Firefox couvrent aussi l’ordre du menu, les ancres des trois langues, la chronologie, les formats mobiles et le changement de mois. `PLAYWRIGHT_FIREFOX_EXECUTABLE_PATH` permet d’utiliser un Firefox Playwright déjà installé.
