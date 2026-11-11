@@ -313,6 +313,9 @@ test('a new CRM month absent from the static build appears in all three language
     assert.equal(await page.locator('#eventos article h3').textContent(), event.title[lang]);
     assert.equal(await page.locator('#eventos article').count(), 1);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > innerWidth + 1), false);
+    await page.locator('#eventos article').evaluate(node => node.dataset.retained = 'yes');
+    await page.clock.fastForward(60001);
+    assert.equal(await page.locator('#eventos article').getAttribute('data-retained'), 'yes');
     approved = false;
     await page.clock.fastForward(60001);
     await page.waitForFunction(() => document.querySelectorAll('#eventos article').length === 0);

@@ -21,7 +21,11 @@ const month = mexicoMonth();
     const booking = root.dataset.bookingUrl || '';
     let updating = false;
     let approvedMonth = '';
+    let rendered = '';
     const show = (month: string, events: CalendarEvent[]) => {
+      const next = JSON.stringify([month, events]);
+      if (rendered === next) return;
+      rendered = next;
       root.innerHTML = renderAgenda({ months: { [month]: events } }, month, lang, booking);
       root.dataset.month = month;
     };
