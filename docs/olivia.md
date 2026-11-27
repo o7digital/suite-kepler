@@ -27,3 +27,20 @@ Validation: npm run build, npm run check, npm test; then verify an actual
 production exchange in all three languages and a signed conversation follow-up.
 Rollback: remove OliviaAI from SiteLayout and redeploy; the dedicated gateway
 can be stopped without affecting other tenants.
+
+The gateway `/health` probes the private engine with a three-second timeout and
+returns HTTP 503 when that engine cannot respond. A running gateway alone does
+not mean that chat is available.
+
+If production chat returns 503, check `docker logs --since 10m
+kepler-olivia-gateway` and the state of `olivia-v3` and `olivia-v3-postgres`.
+Both engine containers are required for Kepler, even though the public-facing
+gateway is separate. On 2026-11-26, both were found stopped while the gateway
+incorrectly reported healthy. Starting PostgreSQL and then the API restored
+real chat responses. Host continuity controls manage these engine containers'
+startup and enforce `restart=no`; do not override that policy. Do not retire
+them while Kepler uses them, and include them in authorized host recovery.
+
+When updating the gateway, deploy `gateway.mjs`, `health.mjs`, `knowledge.txt`
+and `compose.yaml` together to `/opt/o7/apps/kepler-olivia`, then run
+`docker compose up -d --force-recreate gateway` from that directory.

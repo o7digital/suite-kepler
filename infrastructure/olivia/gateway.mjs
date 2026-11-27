@@ -1,6 +1,7 @@
 import http from 'node:http';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { engineAvailable } from './health.mjs';
 const tenant = 'kepler';
 const key = process.env.GATEWAY_KEY;
 if (!key || !process.env.OLIVIA_PASSWORD) throw new Error('Gateway credentials required');
@@ -21,7 +22,10 @@ async function upstream(path, body, auth = true) {
 }
 http.createServer(async (req, res) => {
   const json = (status, data) => { res.writeHead(status, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }); res.end(JSON.stringify(data)); };
-  if (req.url === '/health' && req.method === 'GET') return json(200, { status: 'ok', version: '3.5', tenant });
+  if (req.url === '/health' && req.method === 'GET') {
+    const available = await engineAvailable();
+    return json(available ? 200 : 503, { status: available ? 'ok' : 'unavailable', version: '3.5', tenant });
+  }
   if (req.url !== '/chat' || req.method !== 'POST') return json(404, { error: 'Not found' });
   if (!equal(req.headers.authorization, `Bearer ${key}`)) return json(401, { error: 'Unauthorized' });
   const ip = req.headers['x-visitor-ip'] || 'unknown';
