@@ -276,7 +276,7 @@ for (const lang of ['es', 'en', 'zh']) {
     let payload;
     await page.route('**/api/olivia', async route => {
       payload = route.request().postDataJSON();
-      await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ answer: 'Kepler: lavandería gratuita a partir de 5 noches.', conversation: 'signed-conversation' }) });
+      await route.fulfill({ contentType: 'application/json', body: JSON.stringify({ answer: 'Kepler: lavandería gratuita a partir de 5 noches. Reservar: https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn&lang=en.', conversation: 'signed-conversation' }) });
     });
     await page.goto(base + (lang === 'es' ? '/' : `/${lang}/`));
     const widget = page.locator('kepler-olivia');
@@ -288,6 +288,19 @@ for (const lang of ['es', 'en', 'zh']) {
     await widget.locator('.message:not(.user)').filter({ hasText: 'Kepler: lavandería' }).waitFor();
     assert.equal(payload.language, lang);
     assert.equal(payload.consent, true);
+    const bookingLink = widget.locator('.message a');
+    assert.equal(await bookingLink.getAttribute('href'), 'https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn&lang=en');
+    assert.equal(await bookingLink.getAttribute('target'), '_blank');
+    assert.equal(await bookingLink.getAttribute('rel'), 'noopener noreferrer');
+    if (lang === 'en') {
+      await page.context().route('https://hotels.cloudbeds.com/**', r => r.fulfill({ contentType: 'text/html', body: '<title>Reservations</title>' }));
+      const popupPromise = page.waitForEvent('popup');
+      await bookingLink.click();
+      const popup = await popupPromise;
+      await popup.waitForLoadState();
+      assert.equal(popup.url(), 'https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn&lang=en');
+      await popup.close();
+    }
     const rect = await widget.locator('.panel').boundingBox();
     assert.ok(rect.x >= 0 && rect.x + rect.width <= 390 && rect.y >= 0);
     await page.setViewportSize({ width: 1440, height: 1000 });
@@ -298,6 +311,29 @@ for (const lang of ['es', 'en', 'zh']) {
     await page.close();
   });
 }
+
+test('Olivia links preserve punctuation and render untrusted content as text', async () => {
+  const page = await browser.newPage();
+  const answer = 'Reserve (https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn). Read https://example.com/Hotel_(Kepler). 中文：https://example.com/zh。 <img src=x onerror="window.oliviaInjected=true"> javascript:alert(1)';
+  await page.route('**/api/olivia', r => r.fulfill({ json: { answer, conversation: 'signed-conversation' } }));
+  await page.goto(base + '/en/');
+  const widget = page.locator('kepler-olivia');
+  await widget.locator('.toggle').click();
+  await widget.locator('.consent input').check();
+  await widget.locator('form input').fill('Where can I book?');
+  await widget.locator('.send').click();
+  const message = widget.locator('.message').last();
+  await message.locator('a').first().waitFor();
+  assert.equal(await message.textContent(), answer);
+  assert.deepEqual(await message.locator('a').evaluateAll(links => links.map(link => link.getAttribute('href'))), [
+    'https://hotels.cloudbeds.com/en/reservation/lSYkcf?currency=mxn',
+    'https://example.com/Hotel_(Kepler)',
+    'https://example.com/zh',
+  ]);
+  assert.equal(await message.locator('img, script').count(), 0);
+  assert.equal(await page.evaluate(() => window.oliviaInjected), undefined);
+  await page.close();
+});
 
 test('a new CRM month absent from the static build appears in all three languages', async () => {
   for (const lang of ['es', 'en', 'zh']) {

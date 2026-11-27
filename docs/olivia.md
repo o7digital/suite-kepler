@@ -3,7 +3,9 @@
 The shared site layout loads a Spanish, English and Simplified Chinese chat on every page. The
 cream, charcoal and gold panel and layered shadows follow suitesmine-bot's
 Olivia design. Shadow DOM isolates the widget from the site styles. Consent
-is required before sending; chat content is rendered as plain text.
+is required before sending; chat content is rendered as text with clickable
+HTTP/HTTPS links that open in a separate tab. Model output is never rendered
+as HTML.
 
 Browser → Vercel POST /api/olivia → authenticated VPS gateway at
 https://olivia.o7digitalgroup.com/kepler/chat → private Olivia V3.5 /v1/chat.

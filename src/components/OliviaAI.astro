@@ -84,6 +84,26 @@ const es = lang === 'es';
       const es = lang === 'es';
       let busy = false;
       let conversation: string | undefined;
+      const renderAnswer = (element: HTMLElement, text: string) => {
+        element.replaceChildren();
+        let offset = 0;
+        for (const match of text.matchAll(/https?:\/\/[^\s<>"'，。；！？、（）【】《》]+/gi)) {
+          let href = match[0].replace(/[.,;:!?]+$/u, '');
+          for (const [open, close] of [['(', ')'], ['[', ']'], ['{', '}']]) {
+            while (href.endsWith(close) && href.split(close).length > href.split(open).length) href = href.slice(0, -1);
+          }
+          try { new URL(href); } catch { continue; }
+          element.append(document.createTextNode(text.slice(offset, match.index)));
+          const link = document.createElement('a');
+          link.href = href;
+          link.textContent = href;
+          link.target = '_blank';
+          link.rel = 'noopener noreferrer';
+          element.append(link);
+          offset = match.index + href.length;
+        }
+        element.append(document.createTextNode(text.slice(offset)));
+      };
       const addMessage = (text: string, user = false) => {
         const p = document.createElement('p'); p.className = user ? 'message user' : 'message'; p.textContent = text;
         messages.append(p); messages.scrollTop = messages.scrollHeight; return p;
@@ -106,7 +126,7 @@ const es = lang === 'es';
           if (!response.ok) throw new Error(String(response.status));
           const data = await response.json();
           if (typeof data.answer !== 'string' || typeof data.conversation !== 'string') throw new Error('Invalid response');
-          pending.textContent = data.answer; conversation = data.conversation;
+          renderAnswer(pending, data.answer); conversation = data.conversation;
         } catch (err) {
           pending.remove(); input.value = text;
           error.textContent = (err as Error).message === '429' ? (es ? 'Demasiados mensajes. Espera un minuto e inténtalo de nuevo.' : localize(lang, 'Too many messages. Wait a minute and try again.')) : (es ? 'Olivia no está disponible ahora. Inténtalo de nuevo o contacta al equipo de reservas.' : localize(lang, 'Olivia is unavailable right now. Try again or contact reservations.'));
